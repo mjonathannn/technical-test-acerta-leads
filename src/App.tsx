@@ -1,10 +1,15 @@
-import "./App.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
+import { ReadLeads, CreateLeads } from "./pages"
 
 const App = (): JSX.Element => {
   return (
-    <div>
-      <span>Hello World</span>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ReadLeads />} />
+        <Route path="/createLeads" element={<CreateLeads />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

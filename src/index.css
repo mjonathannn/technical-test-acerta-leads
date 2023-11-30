@@ -1,4 +1,12 @@
+:root {
+  --primary-base: #198cff;
+  --background-white: #ffffff;
+  --background-system: #f5f6fa;
+}
+
 body {
   margin: 0;
   padding: 0;
+  font-family: "Source Sans 3", sans-serif;
+  background: var(--background-system);
 }
