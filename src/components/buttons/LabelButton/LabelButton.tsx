@@ -12,9 +12,9 @@ type Props = {
 const LabelButton = ({ label, showIcon, handleClick }: Props): JSX.Element => {
   return (
     <Button onClick={() => handleClick()}>
-      <span>{label}</span>
+      <label>{label}</label>
 
-      {showIcon && <IoAddSharp className="icon" />}
+      {showIcon && <IoAddSharp />}
     </Button>
   )
 }

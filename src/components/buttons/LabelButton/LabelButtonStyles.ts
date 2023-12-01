@@ -11,7 +11,7 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
 
-  span {
+  label {
     font-family: "Source Sans 3", sans-serif;
     font-size: 16px;
     font-style: normal;
@@ -21,7 +21,7 @@ export const Button = styled.button`
     margin: 0 5px 0 0;
   }
 
-  .icon {
+  :nth-child(2) {
     color: var(--primary-base);
     font-size: 25px;
   }
