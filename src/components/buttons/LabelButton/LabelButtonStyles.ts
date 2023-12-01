@@ -7,7 +7,7 @@ export const Button = styled.button`
   height: 40px;
   width: 133px;
   background-color: var(--background-white);
-  border: 2px solid var(--primary-base);
+  border: 1px solid var(--primary-base);
   border-radius: 4px;
   cursor: pointer;
 
@@ -23,6 +23,6 @@ export const Button = styled.button`
 
   .icon {
     color: var(--primary-base);
-    font-size: 27px;
+    font-size: 25px;
   }
 `

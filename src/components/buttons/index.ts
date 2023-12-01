@@ -1,1 +1,1 @@
-export { default as NewLeadButton } from "./NewLeadButton/NewLeadButton"
+export { default as LabelButton } from "./LabelButton/LabelButton"

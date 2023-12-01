@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Main, Section } from "./ReadLeadsStyle"
 
 import { MainHeader } from "../../components/headers"
-import { NewLeadButton } from "../../components/buttons"
+import { LabelButton } from "../../components/buttons"
 
 const ReadLeads = (): JSX.Element => {
   const navigate = useNavigate()
@@ -19,7 +19,12 @@ const ReadLeads = (): JSX.Element => {
       <Section>
         <h1>Consulta de Leads</h1>
 
-        <NewLeadButton handleClick={() => handleClick()} />
+        <LabelButton
+          type="Primary"
+          label="Novo Lead"
+          showIcon
+          handleClick={() => handleClick()}
+        />
       </Section>
     </Main>
   )
