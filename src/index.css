@@ -1,8 +1,11 @@
 :root {
+  --grey-light: #b9c2cb;
   --grey-darker: #252433;
+  --grey-lighter: #dce1e5;
   --primary-base: #198cff;
   --background-white: #ffffff;
   --background-system: #f5f6fa;
+  --semantic-negative-dark: #cc0500;
 }
 
 * {
