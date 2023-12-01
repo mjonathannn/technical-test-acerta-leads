@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 import { Main, Section } from "./ReadLeadsStyle"
 
+import { Filter } from "../../components"
 import { MainHeader } from "../../components/headers"
 import { LabelButton } from "../../components/buttons"
 
@@ -26,6 +27,8 @@ const ReadLeads = (): JSX.Element => {
           handleClick={() => handleClick()}
         />
       </Section>
+
+      <Filter />
     </Main>
   )
 }
