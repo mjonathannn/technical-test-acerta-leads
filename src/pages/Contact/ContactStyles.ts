@@ -9,24 +9,6 @@ export const Container = styled.div`
   background-color: var(--background-white);
   border-radius: 12px;
 `
-export const FormHeaderContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 0 16px 0;
-
-  :first-child {
-    color: var(--secondary-base);
-  }
-
-  h1 {
-    margin: 0 0 0 8px;
-    color: var(--grey-darker);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-  }
-`
 export const InputsContainer = styled.div`
   display: flex;
   justify-content: space-between;

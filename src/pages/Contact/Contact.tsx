@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { MdOutlinePhone } from "react-icons/md"
 import { BsExclamationOctagon } from "react-icons/bs"
 
 import {
   Main,
   Container,
-  FormHeaderContainer,
   InputsContainer,
   ButtonsContainer,
   ErrorMessage,
@@ -13,7 +11,7 @@ import {
 
 import { useAppContext } from "../../context/appContext"
 import { InputPhone, InputText } from "../../components/inputs"
-import { Header, LabelButton, StepCounter } from "../../components"
+import { FormTitle, Header, LabelButton, StepCounter } from "../../components"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
@@ -26,10 +24,7 @@ const Contact = (): JSX.Element => {
       <Container>
         <StepCounter />
 
-        <FormHeaderContainer>
-          <MdOutlinePhone size={30} />
-          <h1>Contato</h1>
-        </FormHeaderContainer>
+        <FormTitle />
 
         <form onSubmit={formik.handleSubmit}>
           <InputsContainer>

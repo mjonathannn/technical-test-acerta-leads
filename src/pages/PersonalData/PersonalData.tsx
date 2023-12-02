@@ -1,6 +1,6 @@
 import { Main, Container } from "./PersonalDataStyles"
 
-import { Header, StepCounter } from "../../components"
+import { FormTitle, Header, StepCounter } from "../../components"
 
 const PersonalData = (): JSX.Element => {
   return (
@@ -9,6 +9,8 @@ const PersonalData = (): JSX.Element => {
 
       <Container>
         <StepCounter firstStep />
+
+        <FormTitle personalData />
       </Container>
     </Main>
   )
