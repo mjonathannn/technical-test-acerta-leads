@@ -24,3 +24,7 @@ body {
   font-family: "Source Sans 3", sans-serif;
   background-color: var(--background-system);
 }
+
+input {
+  font-family: "Source Sans 3", sans-serif;
+}

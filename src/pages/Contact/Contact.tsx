@@ -18,6 +18,7 @@ import { useAppContext } from "../../context/appContext"
 import { Header, InputText, LabelButton } from "../../components"
 import FirstStepFinished from "../../images/first_step_finished.svg"
 import SecondStepCurrent from "../../images/second_step_current.svg"
+import { InputPhone } from "../../components/inputs"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
@@ -77,12 +78,10 @@ const Contact = (): JSX.Element => {
               )}
             </div>
 
-            <InputText
+            <InputPhone
               id="phone"
               type="text"
               name="phone"
-              title="Telefone"
-              placeholder="Digite o telefone do cliente"
               value={formik.values.phone}
               setValue={formik.setFieldValue}
             />
