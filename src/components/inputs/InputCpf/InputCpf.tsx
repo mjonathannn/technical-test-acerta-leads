@@ -5,10 +5,18 @@ type Props = {
   type: string
   name: string
   value: string
-  setValue: any
+  onChange: any
+  onBlur: any
 }
 
-const InputCpf = ({ id, type, name, value, setValue }: Props): JSX.Element => {
+const InputCpf = ({
+  id,
+  type,
+  name,
+  value,
+  onChange,
+  onBlur,
+}: Props): JSX.Element => {
   const handleChange = (value: string) => {
     let newValue = value
 
@@ -19,7 +27,7 @@ const InputCpf = ({ id, type, name, value, setValue }: Props): JSX.Element => {
       newValue = newValue.replace(/(\d{3})(\d)/, "$1.$2")
       newValue = newValue.replace(/(\d{3})(\d)/, "$1-$2")
 
-      setValue(name, newValue)
+      onChange(name, newValue)
     }
   }
 
@@ -35,6 +43,7 @@ const InputCpf = ({ id, type, name, value, setValue }: Props): JSX.Element => {
         placeholder="Digite o CPF do cliente"
         autoComplete="off"
         onChange={(event: any) => handleChange(event.target.value)}
+        onBlur={onBlur}
       />
     </Container>
   )

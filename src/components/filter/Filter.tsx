@@ -39,7 +39,8 @@ const Filter = (): JSX.Element => {
               type="text"
               name="cpf"
               value={formik.values.cpf}
-              setValue={formik.setFieldValue}
+              onChange={formik.setFieldValue}
+              onBlur={formik.handleBlur}
             />
             {/* {formik.touched.cpf && formik.errors.cpf && (
               <ErrorMessage>
