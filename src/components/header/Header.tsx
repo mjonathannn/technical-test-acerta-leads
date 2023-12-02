@@ -27,7 +27,7 @@ const Header = ({ label, showButton }: Props): JSX.Element => {
         {showButton && (
           <LabelButton
             type="button"
-            appearance="Secondary"
+            appearance="secondary"
             label="Novo lead"
             showIcon
             onClick={() => handleClick()}

@@ -1,32 +1,11 @@
-import { useNavigate } from "react-router-dom"
+import { Main } from "./ReadLeadsStyle"
 
-import { Main, Section } from "./ReadLeadsStyle"
-
-import { Filter } from "../../components"
-import { MainHeader } from "../../components/headers"
-import { LabelButton } from "../../components/buttons"
+import { Header, Filter } from "../../components"
 
 const ReadLeads = (): JSX.Element => {
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate("/createLeads")
-  }
-
   return (
     <Main>
-      <MainHeader />
-
-      <Section>
-        <h1>Consulta de Leads</h1>
-
-        <LabelButton
-          type="Primary"
-          label="Novo Lead"
-          showIcon
-          handleClick={() => handleClick()}
-        />
-      </Section>
+      <Header label="Consulta de Leads" showButton />
 
       <Filter />
     </Main>

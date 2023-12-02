@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 type Props = {
-  appearance: "Primary" | "Secondary"
+  appearance: "primary" | "secondary"
 }
 
 export const Button = styled.button<Props>`
@@ -12,19 +12,19 @@ export const Button = styled.button<Props>`
   min-width: 120px;
   padding: 0 14px;
   background-color: ${({ appearance }) =>
-    appearance === "Primary"
+    appearance === "primary"
       ? "var(--primary-base)"
       : "var(--background-white)"};
   border: 1px solid var(--primary-base);
   border-radius: 4px;
   cursor: pointer;
 
-  label {
+  span {
     font-family: "Source Sans 3", sans-serif;
     font-size: 16px;
     font-style: normal;
     color: ${({ appearance }) =>
-      appearance === "Primary"
+      appearance === "primary"
         ? "var(--background-white)"
         : "var(--primary-base)"};
     font-weight: 600;

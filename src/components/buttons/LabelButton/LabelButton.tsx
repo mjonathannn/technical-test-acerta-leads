@@ -3,10 +3,11 @@ import { IoAddSharp } from "react-icons/io5"
 import { Button } from "./LabelButtonStyles"
 
 type Props = {
-  type: "button" | "submit" | "reset" | undefined
-  appearance: "Primary" | "Secondary"
+  type: "button" | "submit" | "reset"
+  appearance: "primary" | "secondary"
   label: string
   showIcon?: boolean
+  disabled?: boolean
   onClick: () => void
 }
 
@@ -15,11 +16,12 @@ const LabelButton = ({
   appearance,
   label,
   showIcon,
+  disabled,
   onClick,
 }: Props): JSX.Element => {
   return (
     <Button type={type} appearance={appearance} onClick={() => onClick()}>
-      <label>{label}</label>
+      <span>{label}</span>
 
       {showIcon && <IoAddSharp />}
     </Button>

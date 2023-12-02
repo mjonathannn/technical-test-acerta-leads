@@ -1,8 +1,14 @@
+import { Main, PersonalDataContainer } from "./CreateLeadsStyles"
+
+import { Header } from "../../components"
+
 const CreateLeads = (): JSX.Element => {
   return (
-    <div>
-      <span>Cadastro</span>
-    </div>
+    <Main>
+      <Header label="Cadastro de Leads" />
+
+      <PersonalDataContainer></PersonalDataContainer>
+    </Main>
   )
 }
 
