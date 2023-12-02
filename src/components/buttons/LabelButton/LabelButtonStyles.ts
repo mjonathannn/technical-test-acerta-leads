@@ -11,30 +11,51 @@ export const Button = styled.button<Props>`
   height: 40px;
   min-width: 120px;
   padding: 0 14px;
-  background-color: ${({ appearance }) =>
+  background: ${({ appearance }) =>
     appearance === "primary"
       ? "var(--primary-base)"
       : "var(--background-white)"};
   border: 1px solid var(--primary-base);
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.2s;
 
   span {
     font-family: "Source Sans 3", sans-serif;
     font-size: 16px;
-    font-style: normal;
+    font-weight: 600;
     color: ${({ appearance }) =>
       appearance === "primary"
         ? "var(--background-white)"
         : "var(--primary-base)"};
-    font-weight: 600;
-    line-height: 120%;
-    cursor: pointer;
   }
 
   :nth-child(2) {
     color: var(--primary-base);
     font-size: 24px;
-    margin: -3px 0 0 4px;
+    margin: 0 0 0 4px;
+  }
+
+  &:hover {
+    background: ${({ appearance }) =>
+      appearance === "primary"
+        ? "var(--primary-darker)"
+        : "var(--primary-base)"};
+
+    span,
+    :nth-child(2) {
+      color: var(--background-white);
+    }
+  }
+
+  &:disabled {
+    border: 1px solid var(--background-grey);
+    background: var(--background-grey);
+    cursor: default;
+
+    span,
+    :nth-child(2) {
+      color: var(--grey-light);
+    }
   }
 `

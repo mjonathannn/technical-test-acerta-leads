@@ -29,7 +29,7 @@ const Header = ({ label, showButton }: Props): JSX.Element => {
             type="button"
             appearance="secondary"
             label="Novo lead"
-            showIcon
+            icon
             onClick={() => handleClick()}
           />
         )}
