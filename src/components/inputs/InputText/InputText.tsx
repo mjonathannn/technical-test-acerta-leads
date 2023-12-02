@@ -7,7 +7,8 @@ type Props = {
   title: string
   placeholder: string
   value: string
-  setValue: any
+  onChange: any
+  onBlur: any
 }
 
 const InputText = ({
@@ -17,10 +18,11 @@ const InputText = ({
   title,
   placeholder,
   value,
-  setValue,
+  onChange,
+  onBlur,
 }: Props): JSX.Element => {
   const handleChange = (value: string) => {
-    setValue(name, value)
+    onChange(name, value)
   }
 
   return (
@@ -35,6 +37,7 @@ const InputText = ({
         placeholder={placeholder}
         autoComplete="off"
         onChange={(event: any) => handleChange(event.target.value)}
+        onBlur={onBlur}
       />
     </Container>
   )

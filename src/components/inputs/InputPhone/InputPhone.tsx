@@ -5,7 +5,8 @@ type Props = {
   type: string
   name: string
   value: string
-  setValue: any
+  onChange: any
+  onBlur: any
 }
 
 const InputPhone = ({
@@ -13,7 +14,8 @@ const InputPhone = ({
   type,
   name,
   value,
-  setValue,
+  onChange,
+  onBlur,
 }: Props): JSX.Element => {
   const handleChange = (value: string) => {
     let newValue = value
@@ -24,7 +26,7 @@ const InputPhone = ({
       newValue = newValue.replace(/(\d{2})(\d)/, "($1) $2")
       newValue = newValue.replace(/(\d{5})(\d)/, "$1-$2")
 
-      setValue(name, newValue)
+      onChange(name, newValue)
     }
   }
 
@@ -40,6 +42,7 @@ const InputPhone = ({
         placeholder="Digite o telefone do cliente"
         autoComplete="off"
         onChange={(event: any) => handleChange(event.target.value)}
+        onBlur={onBlur}
       />
     </Container>
   )

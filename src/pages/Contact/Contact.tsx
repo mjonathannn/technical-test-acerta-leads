@@ -5,9 +5,6 @@ import { BsExclamationOctagon } from "react-icons/bs"
 import {
   Main,
   Container,
-  StepCounterContainer,
-  ImageContainer,
-  Line,
   FormHeaderContainer,
   InputsContainer,
   ButtonsContainer,
@@ -15,10 +12,8 @@ import {
 } from "./ContactStyles"
 
 import { useAppContext } from "../../context/appContext"
-import { Header, InputText, LabelButton } from "../../components"
-import FirstStepFinished from "../../images/first_step_finished.svg"
-import SecondStepCurrent from "../../images/second_step_current.svg"
-import { InputPhone } from "../../components/inputs"
+import { InputPhone, InputText } from "../../components/inputs"
+import { Header, LabelButton, StepCounter } from "../../components"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
@@ -29,29 +24,7 @@ const Contact = (): JSX.Element => {
       <Header label="Cadastro de Leads" />
 
       <Container>
-        <StepCounterContainer>
-          <ImageContainer>
-            <img
-              src={FirstStepFinished}
-              alt="First Step Finished"
-              title="First Step Finished"
-            />
-
-            <span>Dados pessoais</span>
-          </ImageContainer>
-
-          <Line />
-
-          <ImageContainer>
-            <img
-              src={SecondStepCurrent}
-              alt="Second Step Current"
-              title="Second Step Current"
-            />
-
-            <span>Contato</span>
-          </ImageContainer>
-        </StepCounterContainer>
+        <StepCounter />
 
         <FormHeaderContainer>
           <MdOutlinePhone size={30} />
@@ -68,7 +41,8 @@ const Contact = (): JSX.Element => {
                 title="E-mail"
                 placeholder="Digite o e-mail do cliente"
                 value={formik.values.email}
-                setValue={formik.setFieldValue}
+                onChange={formik.setFieldValue}
+                onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email && (
                 <ErrorMessage>
@@ -78,13 +52,22 @@ const Contact = (): JSX.Element => {
               )}
             </div>
 
-            <InputPhone
-              id="phone"
-              type="text"
-              name="phone"
-              value={formik.values.phone}
-              setValue={formik.setFieldValue}
-            />
+            <div>
+              <InputPhone
+                id="phone"
+                type="text"
+                name="phone"
+                value={formik.values.phone}
+                onChange={formik.setFieldValue}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.phone && formik.errors.phone && (
+                <ErrorMessage>
+                  <BsExclamationOctagon />
+                  <span>{formik.errors.phone}</span>
+                </ErrorMessage>
+              )}
+            </div>
           </InputsContainer>
 
           <ButtonsContainer>
@@ -99,6 +82,7 @@ const Contact = (): JSX.Element => {
               type="submit"
               appearance="primary"
               label="Cadastrar"
+              disabled={!(formik.isValid && formik.dirty)}
               onClick={() => null}
             />
           </ButtonsContainer>

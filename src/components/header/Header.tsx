@@ -14,7 +14,7 @@ const Header = ({ label, showButton }: Props): JSX.Element => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate("/createLeads")
+    navigate("/personalData")
   }
 
   return (

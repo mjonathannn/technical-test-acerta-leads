@@ -57,7 +57,8 @@ const Filter = (): JSX.Element => {
               title="Nome do cliente"
               placeholder="Digite o nome do cliente"
               value={formik.values.name}
-              setValue={formik.setFieldValue}
+              onChange={formik.setFieldValue}
+              onBlur={formik.handleBlur}
             />
           </div>
         </InputsContainer>

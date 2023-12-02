@@ -26,10 +26,15 @@ export const AppContextProvider = ({ children }: Props): JSX.Element => {
         .string()
         .required("Este campo é obrigatório")
         .email("Este campo deve ter um e-mail válido"),
+      phone: yup
+        .string()
+        .required("Este campo é obrigatório")
+        .min(15, "Este campo deve ter um telefone válido"),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
     },
+    validateOnBlur: true,
   })
 
   return (
