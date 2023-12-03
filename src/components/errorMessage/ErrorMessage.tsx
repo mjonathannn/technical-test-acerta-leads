@@ -3,7 +3,7 @@ import { BsExclamationOctagon } from "react-icons/bs"
 import { ErrorMessageContainer } from "./ErrorMessageStyles"
 
 type Props = {
-  message: string
+  message: string | undefined
 }
 
 const ErrorMessage = ({ message }: Props): JSX.Element => {
