@@ -2,24 +2,26 @@ import { useNavigate } from "react-router-dom"
 
 import { HeaderContainer, NavContainer } from "./HeaderStyles"
 
-import AcertaLogo from "../../images/acerta_logo.svg"
 import { LabelButton } from ".."
 
-type Props = {
+import AcertaLogo from "../../images/acerta_logo.svg"
+
+type HeaderProps = {
   label: string
   showButton?: boolean
 }
 
-const Header = ({ label, showButton }: Props): JSX.Element => {
+const Header = ({ label, showButton }: HeaderProps): JSX.Element => {
   const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate("/personalData")
-  }
 
   return (
     <HeaderContainer>
-      <img src={AcertaLogo} alt="Acerta Logo" title="Acerta Logo" />
+      <img
+        src={AcertaLogo}
+        alt="Acerta Logo"
+        title="Acerta Logo"
+        onClick={() => navigate("/")}
+      />
 
       <NavContainer>
         <h1>{label}</h1>
@@ -29,8 +31,8 @@ const Header = ({ label, showButton }: Props): JSX.Element => {
             type="button"
             appearance="secondary"
             label="Novo lead"
-            icon
-            onClick={() => handleClick()}
+            showIcon
+            onClick={() => navigate("/personalData")}
           />
         )}
       </NavContainer>

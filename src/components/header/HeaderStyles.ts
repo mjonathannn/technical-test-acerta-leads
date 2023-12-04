@@ -2,6 +2,10 @@ import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   margin: 32px 0;
+
+  img {
+    cursor: pointer;
+  }
 `
 export const NavContainer = styled.nav`
   display: flex;
