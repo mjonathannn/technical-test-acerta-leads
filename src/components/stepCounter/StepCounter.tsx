@@ -5,11 +5,11 @@ import FirstStepCurrent from "../../images/first_step_current.svg"
 import FirstStepFinished from "../../images/first_step_finished.svg"
 import SecondStepCurrent from "../../images/second_step_current.svg"
 
-type Props = {
+type StepCounterProps = {
   firstStep?: boolean
 }
 
-const StepCounter = ({ firstStep }: Props): JSX.Element => {
+const StepCounter = ({ firstStep }: StepCounterProps): JSX.Element => {
   return (
     <StepCounterContainer>
       <ImageContainer>
