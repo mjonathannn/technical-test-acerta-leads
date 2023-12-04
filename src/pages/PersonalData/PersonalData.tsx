@@ -1,4 +1,4 @@
-import * as yup from "yup"
+import * as Yup from "yup"
 import { useFormik } from "formik"
 import { cpf } from "cpf-cnpj-validator"
 import { useNavigate } from "react-router-dom"
@@ -27,14 +27,19 @@ const PersonalData = (): JSX.Element => {
       cpf: "",
       name: "",
       maritalStatus: "",
+      spouse: "",
     },
-    validationSchema: yup.object({
-      cpf: yup
-        .string()
+    validationSchema: Yup.object().shape({
+      cpf: Yup.string()
         .required("Este campo é obrigatório")
         .test("isValid", "CPF Inválido", (value) => cpf.isValid(value)),
-      name: yup.string().required("Este campo é obrigatório"),
-      maritalStatus: yup.string().required("Este campo é obrigatório"),
+      name: Yup.string().required("Este campo é obrigatório"),
+      maritalStatus: Yup.string().required("Este campo é obrigatório"),
+      spouse: Yup.string().when("maritalStatus", ([maritalStatus], schema) => {
+        if (maritalStatus === "casado(a)")
+          return Yup.string().required("Este campo é obrigatório")
+        return schema
+      }),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
@@ -95,21 +100,25 @@ const PersonalData = (): JSX.Element => {
               )}
             </div>
 
-            {/* <div>
+            <div>
               <InputText
-                id="name"
+                id="spouse"
                 type="text"
-                name="name"
-                title="Nome do cliente"
-                placeholder="Digite o nome do cliente"
-                value={formik.values.name}
+                name="spouse"
+                title="Nome do cônjuge"
+                placeholder="Digite o nome do cônjuge"
+                disabled={
+                  formik.values.maritalStatus === "solteiro(a)" ||
+                  formik.values.maritalStatus === ""
+                }
+                value={formik.values.spouse}
                 onChange={formik.setFieldValue}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && formik.errors.name && (
-                <ErrorMessage message={formik.errors.name} />
+              {formik.touched.spouse && formik.errors.spouse && (
+                <ErrorMessage message={formik.errors.spouse} />
               )}
-            </div> */}
+            </div>
           </InputsContainer>
 
           <ButtonsContainer>

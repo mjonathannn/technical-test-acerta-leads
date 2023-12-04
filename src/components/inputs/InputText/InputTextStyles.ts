@@ -34,4 +34,14 @@ export const Input = styled.input`
   &:hover {
     border: 1px solid var(--primary-base);
   }
+
+  &:disabled {
+    background: var(--background-grey);
+    cursor: default;
+
+    &:focus,
+    &:hover {
+      border: 1px solid var(--grey-lighter);
+    }
+  }
 `
