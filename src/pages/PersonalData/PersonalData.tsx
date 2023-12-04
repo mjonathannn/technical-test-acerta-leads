@@ -10,7 +10,7 @@ import {
   ButtonsContainer,
 } from "./PersonalDataStyles"
 
-import { InputCpf, InputText } from "../../components/inputs"
+import { InputCpf, InputSelect, InputText } from "../../components/inputs"
 import {
   ErrorMessage,
   FormTitle,
@@ -26,6 +26,7 @@ const PersonalData = (): JSX.Element => {
     initialValues: {
       cpf: "",
       name: "",
+      maritalStatus: "",
     },
     validationSchema: yup.object({
       cpf: yup
@@ -33,9 +34,10 @@ const PersonalData = (): JSX.Element => {
         .required("Este campo é obrigatório")
         .test("isValid", "CPF Inválido", (value) => cpf.isValid(value)),
       name: yup.string().required("Este campo é obrigatório"),
+      maritalStatus: yup.string().required("Este campo é obrigatório"),
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2))
+      alert(JSON.stringify(values, null, 2))
     },
     validateOnBlur: true,
   })
@@ -83,19 +85,17 @@ const PersonalData = (): JSX.Element => {
 
           <InputsContainer>
             <div>
-              <InputCpf
-                id="cpf"
-                name="cpf"
-                value={formik.values.cpf}
+              <InputSelect
+                name="maritalStatus"
+                title="Estado civil"
                 onChange={formik.setFieldValue}
-                onBlur={formik.handleBlur}
               />
-              {formik.touched.cpf && formik.errors.cpf && (
-                <ErrorMessage message={formik.errors.cpf} />
+              {formik.touched.maritalStatus && formik.errors.maritalStatus && (
+                <ErrorMessage message={formik.errors.maritalStatus} />
               )}
             </div>
 
-            <div>
+            {/* <div>
               <InputText
                 id="name"
                 type="text"
@@ -109,7 +109,7 @@ const PersonalData = (): JSX.Element => {
               {formik.touched.name && formik.errors.name && (
                 <ErrorMessage message={formik.errors.name} />
               )}
-            </div>
+            </div> */}
           </InputsContainer>
 
           <ButtonsContainer>
@@ -117,11 +117,7 @@ const PersonalData = (): JSX.Element => {
               type="button"
               appearance="secondary"
               label="Cancelar"
-              onClick={() => {
-                formik.setFieldValue("cpf", "")
-                formik.setFieldValue("name", "")
-                navigate("/")
-              }}
+              onClick={() => navigate("/")}
             />
 
             <LabelButton
@@ -129,7 +125,8 @@ const PersonalData = (): JSX.Element => {
               appearance="primary"
               label="Avançar"
               // disabled={!(formik.isValid && formik.dirty)}
-              onClick={() => navigate("/contact")}
+              // onClick={() => navigate("/contact")}
+              onClick={null}
             />
           </ButtonsContainer>
         </form>

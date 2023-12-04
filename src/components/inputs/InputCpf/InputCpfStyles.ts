@@ -18,12 +18,14 @@ export const Container = styled.div`
     font-weight: 400;
     line-height: 120%;
     font-family: "Source Sans 3", sans-serif;
+    transition: 0.1s;
 
     &::placeholder {
       color: var(--grey-light);
     }
 
-    &:focus {
+    &:focus,
+    &:hover {
       border: 1px solid var(--primary-base);
     }
   }
