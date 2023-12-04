@@ -1,8 +1,9 @@
-import { Container, Title, Input } from "./InputCpfStyles"
+import InputMask from "react-input-mask"
 
-type Props = {
+import { Container, Title } from "./InputCpfStyles"
+
+type InputCpfProps = {
   id: string
-  type: string
   name: string
   value: string
   onChange: any
@@ -11,38 +12,24 @@ type Props = {
 
 const InputCpf = ({
   id,
-  type,
   name,
   value,
   onChange,
   onBlur,
-}: Props): JSX.Element => {
-  const handleChange = (value: string) => {
-    let newValue = value
-
-    newValue = newValue.replace(/\D/g, "")
-
-    if (newValue.length <= 11) {
-      newValue = newValue.replace(/(\d{3})(\d)/, "$1.$2")
-      newValue = newValue.replace(/(\d{3})(\d)/, "$1.$2")
-      newValue = newValue.replace(/(\d{3})(\d)/, "$1-$2")
-
-      onChange(name, newValue)
-    }
-  }
-
+}: InputCpfProps): JSX.Element => {
   return (
     <Container>
       <Title>CPF</Title>
 
-      <Input
+      <InputMask
         id={id}
-        type={type}
         name={name}
         value={value}
         placeholder="Digite o CPF do cliente"
         autoComplete="off"
-        onChange={(event: any) => handleChange(event.target.value)}
+        mask="999.999.999-99"
+        maskChar={null}
+        onChange={(event: any) => onChange(name, event.target.value)}
         onBlur={onBlur}
       />
     </Container>

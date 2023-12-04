@@ -54,7 +54,6 @@ const PersonalData = (): JSX.Element => {
             <div>
               <InputCpf
                 id="cpf"
-                type="text"
                 name="cpf"
                 value={formik.values.cpf}
                 onChange={formik.setFieldValue}
@@ -86,7 +85,6 @@ const PersonalData = (): JSX.Element => {
             <div>
               <InputCpf
                 id="cpf"
-                type="text"
                 name="cpf"
                 value={formik.values.cpf}
                 onChange={formik.setFieldValue}
