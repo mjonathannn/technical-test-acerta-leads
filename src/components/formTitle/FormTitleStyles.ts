@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-export const FormTitleContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
 
   :first-child {
     color: var(--secondary-base);

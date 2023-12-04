@@ -9,3 +9,16 @@ export const Container = styled.div`
   background-color: var(--background-white);
   border-radius: 12px;
 `
+export const InputsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 85px;
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: end;
+
+  button {
+    margin: 0 0 0 8px;
+  }
+`

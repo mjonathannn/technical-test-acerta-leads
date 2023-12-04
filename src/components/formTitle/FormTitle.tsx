@@ -1,15 +1,15 @@
 import { FaRegUser } from "react-icons/fa"
 import { MdOutlinePhone } from "react-icons/md"
 
-import { FormTitleContainer } from "./FormTitleStyles"
+import { Container } from "./FormTitleStyles"
 
-type Props = {
+type FormTitleProps = {
   personalData?: boolean
 }
 
-const FormTitle = ({ personalData }: Props): JSX.Element => {
+const FormTitle = ({ personalData }: FormTitleProps): JSX.Element => {
   return (
-    <FormTitleContainer>
+    <Container>
       {personalData ? (
         <>
           <FaRegUser size={20} />
@@ -21,7 +21,7 @@ const FormTitle = ({ personalData }: Props): JSX.Element => {
           <h1>Contato</h1>
         </>
       )}
-    </FormTitleContainer>
+    </Container>
   )
 }
 

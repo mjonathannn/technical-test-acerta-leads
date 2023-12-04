@@ -15,7 +15,6 @@ import { FormTitle, Header, LabelButton, StepCounter } from "../../components"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
-  const { formik } = useAppContext()
 
   return (
     <Main>
@@ -26,7 +25,7 @@ const Contact = (): JSX.Element => {
 
         <FormTitle />
 
-        <form onSubmit={formik.handleSubmit}>
+        {/* <form onSubmit={formik.handleSubmit}>
           <InputsContainer>
             <div>
               <InputText
@@ -81,7 +80,7 @@ const Contact = (): JSX.Element => {
               onClick={() => null}
             />
           </ButtonsContainer>
-        </form>
+        </form> */}
       </Container>
     </Main>
   )

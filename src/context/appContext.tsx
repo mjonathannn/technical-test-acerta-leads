@@ -1,46 +1,26 @@
-import * as yup from "yup"
-import { useFormik } from "formik"
-import { createContext, ReactNode, useContext } from "react"
+import { createContext, ReactNode, useContext, useState } from "react"
 
-type Props = {
+type AppContextData = {
+  data: any
+  setData: React.Dispatch<React.SetStateAction<any>>
+}
+
+type AppContextProviderProps = {
   children: ReactNode
 }
-type ContextType = {
-  formik: any
-}
 
-const AppContext = createContext<ContextType | undefined>(undefined)
+const AppContext = createContext<AppContextData | undefined>(undefined)
 
-export const AppContextProvider = ({ children }: Props): JSX.Element => {
-  const formik = useFormik({
-    initialValues: {
-      cpf: "",
-      name: "",
-      maritalStatus: "",
-      spouseName: "",
-      email: "",
-      phone: "",
-    },
-    validationSchema: yup.object({
-      email: yup
-        .string()
-        .required("Este campo é obrigatório")
-        .email("Este campo deve ter um e-mail válido"),
-      phone: yup
-        .string()
-        .required("Este campo é obrigatório")
-        .min(15, "Este campo deve ter um telefone válido"),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
-    validateOnBlur: true,
-  })
+export const AppContextProvider = ({
+  children,
+}: AppContextProviderProps): JSX.Element => {
+  const [data, setData] = useState<any>(null)
 
   return (
     <AppContext.Provider
       value={{
-        formik,
+        data,
+        setData,
       }}
     >
       {children}
@@ -48,7 +28,12 @@ export const AppContextProvider = ({ children }: Props): JSX.Element => {
   )
 }
 
-export const useAppContext = (): ContextType => {
+export const useAppContext = (): AppContextData => {
   const context = useContext(AppContext)
-  return context as ContextType
+
+  if (!context) {
+    throw new Error("useAppContext must be used inside a AppContextProvider")
+  }
+
+  return context
 }
