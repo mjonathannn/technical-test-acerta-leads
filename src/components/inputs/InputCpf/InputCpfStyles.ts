@@ -29,6 +29,28 @@ export const Container = styled.div`
       border: 1px solid var(--primary-base);
     }
   }
+
+  @media (max-width: 1200px) {
+    width: 42vw;
+  }
+
+  @media (max-width: 1000px) {
+    width: 40vw;
+  }
+
+  @media (max-width: 600px) {
+    width: 38vw;
+  }
+
+  @media (max-width: 550px) {
+    input {
+      padding: 6px 0px 6px 6px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    width: 36vw;
+  }
 `
 export const Title = styled.label`
   color: var(--grey-dark);

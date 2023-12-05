@@ -58,4 +58,8 @@ export const Button = styled.button<Props>`
       color: var(--grey-light);
     }
   }
+
+  @media (max-width: 380px) {
+    min-width: auto;
+  }
 `

@@ -8,7 +8,7 @@ type LabelButtonProps = {
   label: string
   showIcon?: boolean
   disabled?: boolean
-  onClick: () => void
+  onClick?: () => void
 }
 
 const LabelButton = ({

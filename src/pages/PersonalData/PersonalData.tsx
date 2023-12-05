@@ -10,6 +10,7 @@ import {
   ButtonsContainer,
 } from "./PersonalDataStyles"
 
+import { useAppContext } from "../../context/appContext"
 import { InputCpf, InputSelect, InputText } from "../../components/inputs"
 import {
   ErrorMessage,
@@ -22,6 +23,8 @@ import {
 const PersonalData = (): JSX.Element => {
   const navigate = useNavigate()
 
+  const { setData } = useAppContext()
+
   const formik = useFormik({
     initialValues: {
       cpf: "",
@@ -31,18 +34,19 @@ const PersonalData = (): JSX.Element => {
     },
     validationSchema: Yup.object().shape({
       cpf: Yup.string()
-        .required("Este campo é obrigatório")
+        .required("Campo obrigatório")
         .test("isValid", "CPF Inválido", (value) => cpf.isValid(value)),
-      name: Yup.string().required("Este campo é obrigatório"),
-      maritalStatus: Yup.string().required("Este campo é obrigatório"),
+      name: Yup.string().required("Campo obrigatório"),
+      maritalStatus: Yup.string().required("Campo obrigatório"),
       spouse: Yup.string().when("maritalStatus", ([maritalStatus], schema) => {
         if (maritalStatus === "casado(a)")
-          return Yup.string().required("Este campo é obrigatório")
+          return Yup.string().required("Campo obrigatório")
         return schema
       }),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      setData(values)
+      // navigate("/contact")
     },
     validateOnBlur: true,
   })
@@ -133,9 +137,7 @@ const PersonalData = (): JSX.Element => {
               type="submit"
               appearance="primary"
               label="Avançar"
-              // disabled={!(formik.isValid && formik.dirty)}
-              // onClick={() => navigate("/contact")}
-              onClick={null}
+              disabled={!(formik.isValid && formik.dirty)}
             />
           </ButtonsContainer>
         </form>

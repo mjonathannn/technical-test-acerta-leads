@@ -50,6 +50,12 @@ const InputSelect = ({
             color: "var(--grey-light)",
             fontFamily: "Source Sans 3",
           }),
+          menu: (base, props) => ({
+            ...base,
+            "@media (max-width: 450px)": {
+              marginTop: "0px",
+            },
+          }),
         }}
         placeholder="Selecione"
         onChange={(option: any) => {

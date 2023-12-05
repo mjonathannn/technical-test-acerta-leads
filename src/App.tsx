@@ -6,8 +6,8 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ReadLeads />} />
-        <Route path="/personalData" element={<PersonalData />} />
+        <Route path="/" element={<PersonalData />} />
+        {/* <Route path="/personalData" element={<PersonalData />} /> */}
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
