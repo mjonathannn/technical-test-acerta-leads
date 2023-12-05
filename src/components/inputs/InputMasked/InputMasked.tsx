@@ -1,6 +1,6 @@
 import InputMask from "react-input-mask"
 
-import { Container, Title } from "./InputMaskedStyles"
+import { InputMaskedContainer, Title } from "./InputMaskedStyles"
 
 type InputMaskedProps = {
   id: string
@@ -24,7 +24,7 @@ const InputMasked = ({
   }
 
   return (
-    <Container>
+    <InputMaskedContainer>
       <Title>{type === "Phone" ? "Telefone" : type}</Title>
 
       <InputMask
@@ -40,7 +40,7 @@ const InputMasked = ({
         onChange={(event: any) => handleChange(event.target.value)}
         onBlur={onBlur}
       />
-    </Container>
+    </InputMaskedContainer>
   )
 }
 

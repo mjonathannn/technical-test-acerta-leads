@@ -1,3 +1,4 @@
+import axios from "axios"
 import * as Yup from "yup"
 import { useFormik } from "formik"
 import { useNavigate } from "react-router-dom"
@@ -9,6 +10,7 @@ import {
   ButtonsContainer,
 } from "./ContactStyles"
 
+import { useAppContext } from "../../context/appContext"
 import { InputMasked, InputText } from "../../components/inputs"
 import {
   ErrorMessage,
@@ -20,6 +22,8 @@ import {
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
+
+  const { personalData } = useAppContext()
 
   const formik = useFormik({
     initialValues: {
@@ -35,7 +39,15 @@ const Contact = (): JSX.Element => {
         .min(15, "Telefone inválido"),
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2))
+      axios
+        .post("http://127.0.0.1:3333/createLead", {
+          ...personalData,
+          ...values,
+        })
+        .then(() => navigate("/"))
+        .catch((error) => {
+          console.error(error)
+        })
     },
     validateOnBlur: true,
   })

@@ -23,7 +23,7 @@ import {
 const PersonalData = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { setData } = useAppContext()
+  const { setPersonalData } = useAppContext()
 
   const formik = useFormik({
     initialValues: {
@@ -48,9 +48,8 @@ const PersonalData = (): JSX.Element => {
       ),
     }),
     onSubmit: (values) => {
-      setData(values)
+      setPersonalData(values)
       navigate("/contact")
-      // alert(JSON.stringify(values, null, 2))
     },
     validateOnBlur: true,
   })
@@ -116,10 +115,7 @@ const PersonalData = (): JSX.Element => {
                 name="spouseName"
                 title="Nome do cônjuge"
                 placeholder="Digite o nome do cônjuge"
-                disabled={
-                  formik.values.maritalStatus === "solteiro(a)" ||
-                  formik.values.maritalStatus === ""
-                }
+                disabled={!(formik.values.maritalStatus === "casado(a)")}
                 value={formik.values.spouseName}
                 onChange={formik.setFieldValue}
                 onBlur={formik.handleBlur}

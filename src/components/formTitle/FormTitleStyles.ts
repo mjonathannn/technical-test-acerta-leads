@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
+export const FormTitleContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 0 0 20px 0;

@@ -1,4 +1,4 @@
-import { Container, Title, Input } from "./InputTextStyles"
+import { InputTextContainer, Title, Input } from "./InputTextStyles"
 
 type InputTextProps = {
   id: string
@@ -28,7 +28,7 @@ const InputText = ({
   }
 
   return (
-    <Container>
+    <InputTextContainer>
       <Title>{title}</Title>
 
       <Input
@@ -42,7 +42,7 @@ const InputText = ({
         onChange={(event: any) => handleChange(event.target.value)}
         onBlur={onBlur}
       />
-    </Container>
+    </InputTextContainer>
   )
 }
 

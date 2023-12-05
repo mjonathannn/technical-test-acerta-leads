@@ -1,6 +1,6 @@
 import Select from "react-select"
 
-import { Container, Title } from "./InputSelectStyles"
+import { InputSelectContainer, Title } from "./InputSelectStyles"
 
 type InputSelectProps = {
   name: string
@@ -18,7 +18,7 @@ const InputSelect = ({
   }
 
   return (
-    <Container>
+    <InputSelectContainer>
       <Title>{title}</Title>
 
       <Select
@@ -67,7 +67,7 @@ const InputSelect = ({
           handleChange(option.value)
         }}
       />
-    </Container>
+    </InputSelectContainer>
   )
 }
 
