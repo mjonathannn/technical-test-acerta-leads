@@ -25,6 +25,8 @@ const InputSelect = ({
         options={[
           { value: "solteiro(a)", label: "Solteiro(a)" },
           { value: "casado(a)", label: "Casado(a)" },
+          { value: "viúvo(a)", label: "Viúvo(a)" },
+          { value: "separado(a)", label: "Separado(a)" },
         ]}
         styles={{
           control: (base, props) => ({
