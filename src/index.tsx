@@ -9,9 +9,7 @@ import { AppContextProvider } from "./context/appContext"
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 root.render(
-  <React.StrictMode>
-    <AppContextProvider>
-      <App />
-    </AppContextProvider>
-  </React.StrictMode>
+  <AppContextProvider>
+    <App />
+  </AppContextProvider>
 )

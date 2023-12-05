@@ -35,7 +35,7 @@ const Contact = (): JSX.Element => {
         .min(15, "Telefone inválido"),
     }),
     onSubmit: (values) => {
-      //
+      // alert(JSON.stringify(values, null, 2))
     },
     validateOnBlur: true,
   })

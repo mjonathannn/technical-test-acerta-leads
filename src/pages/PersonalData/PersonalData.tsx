@@ -30,7 +30,7 @@ const PersonalData = (): JSX.Element => {
       cpf: "",
       name: "",
       maritalStatus: "",
-      spouse: "",
+      spouseName: "",
     },
     validationSchema: Yup.object().shape({
       cpf: Yup.string()
@@ -38,11 +38,14 @@ const PersonalData = (): JSX.Element => {
         .test("isValid", "CPF inválido", (value) => cpf.isValid(value)),
       name: Yup.string().required("Campo obrigatório"),
       maritalStatus: Yup.string().required("Campo obrigatório"),
-      spouse: Yup.string().when("maritalStatus", ([maritalStatus], schema) => {
-        if (maritalStatus === "casado(a)")
-          return Yup.string().required("Campo obrigatório")
-        return schema
-      }),
+      spouseName: Yup.string().when(
+        "maritalStatus",
+        ([maritalStatus], schema) => {
+          if (maritalStatus === "casado(a)")
+            return Yup.string().required("Campo obrigatório")
+          return schema
+        }
+      ),
     }),
     onSubmit: (values) => {
       setData(values)
@@ -108,21 +111,21 @@ const PersonalData = (): JSX.Element => {
 
             <div>
               <InputText
-                id="spouse"
+                id="spouseName"
                 type="text"
-                name="spouse"
+                name="spouseName"
                 title="Nome do cônjuge"
                 placeholder="Digite o nome do cônjuge"
                 disabled={
                   formik.values.maritalStatus === "solteiro(a)" ||
                   formik.values.maritalStatus === ""
                 }
-                value={formik.values.spouse}
+                value={formik.values.spouseName}
                 onChange={formik.setFieldValue}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.spouse && formik.errors.spouse && (
-                <ErrorMessage message={formik.errors.spouse} />
+              {formik.touched.spouseName && formik.errors.spouseName && (
+                <ErrorMessage message={formik.errors.spouseName} />
               )}
             </div>
           </InputsContainer>
