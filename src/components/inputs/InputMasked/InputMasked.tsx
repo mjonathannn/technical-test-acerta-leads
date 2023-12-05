@@ -1,37 +1,41 @@
 import InputMask from "react-input-mask"
 
-import { Container, Title } from "./InputCpfStyles"
+import { Container, Title } from "./InputMaskedStyles"
 
-type InputCpfProps = {
+type InputMaskedProps = {
   id: string
   name: string
   value: string
+  type: "CPF" | "Phone"
   onChange: any
   onBlur: any
 }
 
-const InputCpf = ({
+const InputMasked = ({
   id,
   name,
   value,
+  type,
   onChange,
   onBlur,
-}: InputCpfProps): JSX.Element => {
+}: InputMaskedProps): JSX.Element => {
   const handleChange = (value: string) => {
     onChange(name, value)
   }
 
   return (
     <Container>
-      <Title>CPF</Title>
+      <Title>{type === "Phone" ? "Telefone" : type}</Title>
 
       <InputMask
         id={id}
         name={name}
         value={value}
-        placeholder="Digite o CPF do cliente"
+        placeholder={`Digite o ${
+          type === "Phone" ? "telefone" : type
+        } do cliente`}
         autoComplete="off"
-        mask="999.999.999-99"
+        mask={type === "Phone" ? "(99) 99999-9999" : "999.999.999-99"}
         maskChar={null}
         onChange={(event: any) => handleChange(event.target.value)}
         onBlur={onBlur}
@@ -40,4 +44,4 @@ const InputCpf = ({
   )
 }
 
-export default InputCpf
+export default InputMasked

@@ -1,7 +1,5 @@
 export { default as Header } from "./header/Header"
 export { default as Filter } from "./filter/Filter"
-export { default as InputCpf } from "./inputs/InputCpf/InputCpf"
-export { default as InputText } from "./inputs/InputText/InputText"
 export { default as LabelButton } from "./buttons/LabelButton/LabelButton"
 export { default as StepCounter } from "./stepCounter/StepCounter"
 export { default as FormTitle } from "./formTitle/FormTitle"

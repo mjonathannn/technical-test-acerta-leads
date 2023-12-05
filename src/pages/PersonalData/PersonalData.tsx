@@ -11,7 +11,7 @@ import {
 } from "./PersonalDataStyles"
 
 import { useAppContext } from "../../context/appContext"
-import { InputCpf, InputSelect, InputText } from "../../components/inputs"
+import { InputMasked, InputSelect, InputText } from "../../components/inputs"
 import {
   ErrorMessage,
   FormTitle,
@@ -64,9 +64,10 @@ const PersonalData = (): JSX.Element => {
         <form onSubmit={formik.handleSubmit}>
           <InputsContainer>
             <div>
-              <InputCpf
+              <InputMasked
                 id="cpf"
                 name="cpf"
+                type="CPF"
                 value={formik.values.cpf}
                 onChange={formik.setFieldValue}
                 onBlur={formik.handleBlur}

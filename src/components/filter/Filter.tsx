@@ -10,7 +10,8 @@ import {
   InputsContainer,
 } from "./FilterStyles"
 
-import { InputCpf, InputText, LabelButton } from "../../components"
+import { LabelButton } from "../../components"
+import { InputMasked, InputText } from "../inputs"
 
 const Filter = (): JSX.Element => {
   const formik = useFormik({
@@ -34,9 +35,10 @@ const Filter = (): JSX.Element => {
       <form onSubmit={formik.handleSubmit}>
         <InputsContainer>
           <div>
-            <InputCpf
+            <InputMasked
               id="cpf"
               name="cpf"
+              type="CPF"
               value={formik.values.cpf}
               onChange={formik.setFieldValue}
               onBlur={formik.handleBlur}

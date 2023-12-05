@@ -9,7 +9,7 @@ import {
   ButtonsContainer,
 } from "./ContactStyles"
 
-import { InputPhone, InputText } from "../../components/inputs"
+import { InputMasked, InputText } from "../../components/inputs"
 import {
   ErrorMessage,
   FormTitle,
@@ -68,9 +68,10 @@ const Contact = (): JSX.Element => {
             </div>
 
             <div>
-              <InputPhone
+              <InputMasked
                 id="phone"
                 name="phone"
+                type="Phone"
                 value={formik.values.phone}
                 onChange={formik.setFieldValue}
                 onBlur={formik.handleBlur}
