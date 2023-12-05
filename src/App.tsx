@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import { Contact, ReadLeads, PersonalData } from "./pages"
+// import { Contact, ReadLeads, PersonalData } from "./pages"
+import { Contact, PersonalData } from "./pages"
 
 const App = (): JSX.Element => {
   return (

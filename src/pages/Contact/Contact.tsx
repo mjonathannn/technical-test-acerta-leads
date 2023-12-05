@@ -1,3 +1,5 @@
+import * as Yup from "yup"
+import { useFormik } from "formik"
 import { useNavigate } from "react-router-dom"
 import { BsExclamationOctagon } from "react-icons/bs"
 
@@ -9,12 +11,26 @@ import {
   ErrorMessage,
 } from "./ContactStyles"
 
-import { useAppContext } from "../../context/appContext"
 import { InputPhone, InputText } from "../../components/inputs"
 import { FormTitle, Header, LabelButton, StepCounter } from "../../components"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      phone: "",
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string().required("Campo obrigatório"),
+      phone: Yup.string().required("Campo obrigatório"),
+    }),
+    onSubmit: (values) => {
+      //
+    },
+    validateOnBlur: true,
+  })
 
   return (
     <Main>
@@ -25,7 +41,7 @@ const Contact = (): JSX.Element => {
 
         <FormTitle />
 
-        {/* <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <InputsContainer>
             <div>
               <InputText
@@ -77,10 +93,9 @@ const Contact = (): JSX.Element => {
               appearance="primary"
               label="Cadastrar"
               disabled={!(formik.isValid && formik.dirty)}
-              onClick={() => null}
             />
           </ButtonsContainer>
-        </form> */}
+        </form>
       </Container>
     </Main>
   )
