@@ -8,7 +8,7 @@ type LabelButtonProps = {
   label: string
   showIcon?: boolean
   disabled?: boolean
-  onClick?: () => void
+  onClick: () => void
 }
 
 const LabelButton = ({
@@ -19,12 +19,16 @@ const LabelButton = ({
   disabled,
   onClick,
 }: LabelButtonProps): JSX.Element => {
+  const handleClick = () => {
+    onClick()
+  }
+
   return (
     <Button
       type={type}
       appearance={appearance}
       disabled={disabled}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <span>{label}</span>
 

@@ -60,6 +60,7 @@ export const Button = styled.button<Props>`
   }
 
   @media (max-width: 380px) {
+    height: 35px;
     min-width: auto;
   }
 `

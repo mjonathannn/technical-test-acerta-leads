@@ -47,6 +47,7 @@ const PersonalData = (): JSX.Element => {
     onSubmit: (values) => {
       setData(values)
       // navigate("/contact")
+      alert(JSON.stringify(values, null, 2))
     },
     validateOnBlur: true,
   })
@@ -138,6 +139,7 @@ const PersonalData = (): JSX.Element => {
               appearance="primary"
               label="Avançar"
               disabled={!(formik.isValid && formik.dirty)}
+              onClick={() => null}
             />
           </ButtonsContainer>
         </form>

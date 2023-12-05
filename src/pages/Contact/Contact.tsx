@@ -93,6 +93,7 @@ const Contact = (): JSX.Element => {
               appearance="primary"
               label="Cadastrar"
               disabled={!(formik.isValid && formik.dirty)}
+              onClick={() => null}
             />
           </ButtonsContainer>
         </form>

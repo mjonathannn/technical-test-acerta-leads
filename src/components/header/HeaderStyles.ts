@@ -22,4 +22,10 @@ export const NavContainer = styled.nav`
     font-weight: 600;
     line-height: 120%;
   }
+
+  @media (max-width: 400px) {
+    h1 {
+      font-size: 18px;
+    }
+  }
 `
