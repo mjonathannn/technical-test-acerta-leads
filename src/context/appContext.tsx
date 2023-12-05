@@ -1,26 +1,35 @@
 import { createContext, ReactNode, useContext, useState } from "react"
 
-type AppContextData = {
-  data: any
-  setData: React.Dispatch<React.SetStateAction<any>>
+type AppContextProps = {
+  personalData: PersonalDataProps
+  setPersonalData: React.Dispatch<PersonalDataProps>
 }
 
 type AppContextProviderProps = {
   children: ReactNode
 }
 
-const AppContext = createContext<AppContextData | undefined>(undefined)
+type PersonalDataProps = {
+  cpf?: string
+  name?: string
+  maritalStatus?: string
+  spouseName?: string
+  email?: string
+  phone?: string
+}
+
+const AppContext = createContext<AppContextProps | undefined>(undefined)
 
 export const AppContextProvider = ({
   children,
 }: AppContextProviderProps): JSX.Element => {
-  const [data, setData] = useState<any>(null)
+  const [personalData, setPersonalData] = useState<PersonalDataProps>(null)
 
   return (
     <AppContext.Provider
       value={{
-        data,
-        setData,
+        personalData,
+        setPersonalData,
       }}
     >
       {children}
@@ -28,7 +37,7 @@ export const AppContextProvider = ({
   )
 }
 
-export const useAppContext = (): AppContextData => {
+export const useAppContext = (): AppContextProps => {
   const context = useContext(AppContext)
 
   if (!context) {
