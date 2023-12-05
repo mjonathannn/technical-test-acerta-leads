@@ -17,6 +17,10 @@ const InputCpf = ({
   onChange,
   onBlur,
 }: InputCpfProps): JSX.Element => {
+  const handleChange = (value: string) => {
+    onChange(name, value)
+  }
+
   return (
     <Container>
       <Title>CPF</Title>
@@ -29,7 +33,7 @@ const InputCpf = ({
         autoComplete="off"
         mask="999.999.999-99"
         maskChar={null}
-        onChange={(event: any) => onChange(name, event.target.value)}
+        onChange={(event: any) => handleChange(event.target.value)}
         onBlur={onBlur}
       />
     </Container>

@@ -17,12 +17,6 @@ export const Container = styled.div`
     width: 38vw;
   }
 
-  @media (max-width: 550px) {
-    input {
-      padding: 6px 0px 6px 6px;
-    }
-  }
-
   @media (max-width: 450px) {
     width: 36vw;
   }

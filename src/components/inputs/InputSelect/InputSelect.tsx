@@ -40,6 +40,9 @@ const InputSelect = ({
               border: "1px solid var(--primary-base)",
             },
             fontFamily: "Source Sans 3",
+            "@media (max-width: 550px)": {
+              padding: "0",
+            },
           }),
           singleValue: (base, props) => ({
             ...base,

@@ -1,8 +1,9 @@
-import { Container, Title, Input } from "./InputPhoneStyles"
+import InputMask from "react-input-mask"
 
-type Props = {
+import { Container, Title } from "./InputPhoneStyles"
+
+type InputPhoneProps = {
   id: string
-  type: string
   name: string
   value: string
   onChange: any
@@ -11,36 +12,27 @@ type Props = {
 
 const InputPhone = ({
   id,
-  type,
   name,
   value,
   onChange,
   onBlur,
-}: Props): JSX.Element => {
+}: InputPhoneProps): JSX.Element => {
   const handleChange = (value: string) => {
-    let newValue = value
-
-    newValue = newValue.replace(/\D/g, "")
-
-    if (newValue.length <= 11) {
-      newValue = newValue.replace(/(\d{2})(\d)/, "($1) $2")
-      newValue = newValue.replace(/(\d{5})(\d)/, "$1-$2")
-
-      onChange(name, newValue)
-    }
+    onChange(name, value)
   }
 
   return (
     <Container>
       <Title>Telefone</Title>
 
-      <Input
+      <InputMask
         id={id}
-        type={type}
         name={name}
         value={value}
         placeholder="Digite o telefone do cliente"
         autoComplete="off"
+        mask="(99) 99999-9999"
+        maskChar={null}
         onChange={(event: any) => handleChange(event.target.value)}
         onBlur={onBlur}
       />

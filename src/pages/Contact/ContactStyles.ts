@@ -8,11 +8,15 @@ export const Container = styled.div`
   padding: 24px;
   background-color: var(--background-white);
   border-radius: 12px;
+
+  @media (max-width: 1200px) {
+    width: 90vw;
+  }
 `
 export const InputsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 90px;
+  height: 85px;
 `
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -20,22 +24,5 @@ export const ButtonsContainer = styled.div`
 
   button {
     margin: 0 0 0 8px;
-  }
-`
-export const ErrorMessage = styled.div`
-  display: flex;
-  align-items: center;
-
-  :first-child {
-    color: var(--semantic-negative-dark);
-    margin: 0 8px 0 0;
-  }
-
-  span {
-    color: var(--semantic-negative-dark);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
   }
 `

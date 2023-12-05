@@ -35,7 +35,7 @@ const PersonalData = (): JSX.Element => {
     validationSchema: Yup.object().shape({
       cpf: Yup.string()
         .required("Campo obrigatório")
-        .test("isValid", "CPF Inválido", (value) => cpf.isValid(value)),
+        .test("isValid", "CPF inválido", (value) => cpf.isValid(value)),
       name: Yup.string().required("Campo obrigatório"),
       maritalStatus: Yup.string().required("Campo obrigatório"),
       spouse: Yup.string().when("maritalStatus", ([maritalStatus], schema) => {
@@ -46,8 +46,8 @@ const PersonalData = (): JSX.Element => {
     }),
     onSubmit: (values) => {
       setData(values)
-      // navigate("/contact")
-      alert(JSON.stringify(values, null, 2))
+      navigate("/contact")
+      // alert(JSON.stringify(values, null, 2))
     },
     validateOnBlur: true,
   })

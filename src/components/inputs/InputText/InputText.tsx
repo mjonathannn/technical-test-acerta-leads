@@ -1,6 +1,6 @@
 import { Container, Title, Input } from "./InputTextStyles"
 
-type Props = {
+type InputTextProps = {
   id: string
   type: string
   name: string
@@ -22,7 +22,7 @@ const InputText = ({
   disabled,
   onChange,
   onBlur,
-}: Props): JSX.Element => {
+}: InputTextProps): JSX.Element => {
   const handleChange = (value: string) => {
     onChange(name, value)
   }

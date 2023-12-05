@@ -44,7 +44,7 @@ export const Container = styled.div`
 
   @media (max-width: 550px) {
     input {
-      padding: 6px 0px 6px 6px;
+      padding: 8px 10px 8px 10px;
     }
   }
 
