@@ -1,7 +1,10 @@
 import { Id, toast } from "react-toastify"
 import { createContext, ReactNode, useContext, useState } from "react"
 
+import { DatabaseMemory } from "../database-memory.js"
+
 type AppContextProps = {
+  databaseMemory: any
   personalData: PersonalDataProps
   setPersonalData: React.Dispatch<PersonalDataProps>
   notify: (type: "success" | "info") => Id
@@ -25,6 +28,8 @@ const AppContext = createContext<AppContextProps | undefined>(undefined)
 export const AppContextProvider = ({
   children,
 }: AppContextProviderProps): JSX.Element => {
+  const databaseMemory = new DatabaseMemory()
+
   const [personalData, setPersonalData] = useState<PersonalDataProps>(null)
 
   const notify = (type: "success" | "info") => {
@@ -54,6 +59,7 @@ export const AppContextProvider = ({
   return (
     <AppContext.Provider
       value={{
+        databaseMemory,
         personalData,
         setPersonalData,
         notify,

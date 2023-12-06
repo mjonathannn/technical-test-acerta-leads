@@ -6,6 +6,7 @@ import { MdOutlineModeEdit } from "react-icons/md"
 import { Container, TableContainer, Main } from "./ReadLeadsStyle"
 
 import { Header } from "../../components"
+import { isLocalhost } from "../../utils"
 import { ENDPOINT_URL } from "../../constants/app"
 import { useAppContext } from "../../context/appContext"
 
@@ -24,7 +25,7 @@ type LeadsListDataProps = {
 const ReadLeads = (): JSX.Element => {
   const [leadsListData, setLeadsListData] = useState<LeadsListDataProps[]>([])
 
-  const { notify } = useAppContext()
+  const { databaseMemory, notify } = useAppContext()
 
   const readLeads = () => {
     axios
@@ -38,8 +39,12 @@ const ReadLeads = (): JSX.Element => {
   }
 
   useEffect(() => {
-    readLeads()
-  }, [])
+    if (!isLocalhost()) {
+      setLeadsListData(databaseMemory.list())
+    } else {
+      readLeads()
+    }
+  }, [databaseMemory])
 
   return (
     <Main>
