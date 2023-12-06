@@ -8,9 +8,29 @@ export const FilterContainer = styled.div`
   padding: 24px;
   background-color: var(--background-white);
   border-radius: 12px;
+  margin: 0 0 24px 0;
 
   @media (max-width: 1200px) {
     width: 90vw;
+  }
+`
+export const InputsRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 500px) {
+    display: block;
+  }
+`
+export const InputContainer = styled.div`
+  height: 90px;
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: end;
+
+  button {
+    margin: 0 0 0 8px;
   }
 `
 export const TableContainer = styled.div`

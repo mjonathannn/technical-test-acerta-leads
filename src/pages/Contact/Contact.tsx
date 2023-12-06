@@ -149,7 +149,7 @@ const Contact = (): JSX.Element => {
             <Button
               type="submit"
               appearance="primary"
-              label="Cadastrar"
+              label={leadUpdateData ? "Atualizar" : "Cadastrar"}
               disabled={
                 leadUpdateData
                   ? !formik.isValid

@@ -22,6 +22,17 @@ export class DatabaseMemory {
         phone: "(43) 29546-4129",
       },
     ],
+    [
+      "034.133.430-84",
+      {
+        cpf: "034.133.430-84",
+        name: "Patrícia Nunes Santos",
+        maritalStatus: "casado(a)",
+        spouseName: "Henrique Bortoleto",
+        email: "pns@gmail.com",
+        phone: "(66) 55555-2222",
+      },
+    ],
   ])
 
   list() {
