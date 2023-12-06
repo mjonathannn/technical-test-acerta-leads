@@ -24,16 +24,14 @@ import {
 const PersonalData = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { leadUpdateData, setPersonalData } = useAppContext()
+  const { leadData, setNewLeadData } = useAppContext()
 
   const formik = useFormik({
     initialValues: {
-      cpf: leadUpdateData ? leadUpdateData.leadData.cpf : "",
-      name: leadUpdateData ? leadUpdateData.leadData.name : "",
-      maritalStatus: leadUpdateData
-        ? leadUpdateData.leadData.maritalStatus
-        : "",
-      spouseName: leadUpdateData ? leadUpdateData.leadData.spouseName : "",
+      cpf: leadData ? leadData.cpf : "",
+      name: leadData ? leadData.name : "",
+      maritalStatus: leadData ? leadData.maritalStatus : "",
+      spouseName: leadData ? leadData.spouseName : "",
     },
     validationSchema: Yup.object().shape({
       cpf: Yup.string()
@@ -51,7 +49,7 @@ const PersonalData = (): JSX.Element => {
       ),
     }),
     onSubmit: (values) => {
-      setPersonalData(values)
+      setNewLeadData(values)
       navigate("/contact")
     },
     validateOnBlur: true,
@@ -59,7 +57,7 @@ const PersonalData = (): JSX.Element => {
 
   return (
     <Main>
-      <Header label={leadUpdateData ? "Atualizar Lead" : "Cadastro de Leads"} />
+      <Header label={leadData ? "Atualizar Lead" : "Cadastro de Leads"} />
 
       <Container>
         <StepCounter firstStep />
@@ -104,9 +102,7 @@ const PersonalData = (): JSX.Element => {
               <InputSelect
                 name="maritalStatus"
                 title="Estado civil"
-                value={
-                  leadUpdateData ? leadUpdateData.leadData.maritalStatus : ""
-                }
+                value={leadData ? leadData.maritalStatus : ""}
                 onChange={formik.setFieldValue}
               />
               {formik.touched.maritalStatus && formik.errors.maritalStatus && (
@@ -145,9 +141,7 @@ const PersonalData = (): JSX.Element => {
               appearance="primary"
               label="Avançar"
               disabled={
-                leadUpdateData
-                  ? !formik.isValid
-                  : !(formik.isValid && formik.dirty)
+                leadData ? !formik.isValid : !(formik.isValid && formik.dirty)
               }
               onClick={() => null}
             />

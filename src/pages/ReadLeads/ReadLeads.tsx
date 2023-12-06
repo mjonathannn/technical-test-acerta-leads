@@ -14,63 +14,53 @@ import {
   ButtonsContainer,
 } from "./ReadLeadsStyle"
 
-import { isRemoteHost } from "../../utils"
 import { Button, Header } from "../../components"
 import { useAppContext } from "../../context/appContext"
-import { DATA_SOURCE, ENDPOINT_URL } from "../../constants/app"
 import { InputMasked, InputText } from "../../components/inputs"
 
-type LeadsListDataProps = {
-  leadData: {
-    cpf: string
-    name: string
-    maritalStatus: string
-    spouseName: string
-    email: string
-    phone: string
-  }
-  leadId: string
+type LeadsDataProps = {
+  cpf: string
+  name: string
+  maritalStatus: string
+  spouseName: string
+  email: string
+  phone: string
+  id: number
 }
 
 const ReadLeads = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const [withFilter, setWithFilter] = useState(false)
-  const [leadsListData, setLeadsListData] = useState<LeadsListDataProps[]>([])
+  const { setLeadData, notify } = useAppContext()
 
-  const { databaseMemory, setLeadUpdateData, notify } = useAppContext()
+  const [withFilter, setWithFilter] = useState(false)
+  const [leads, setLeads] = useState<LeadsDataProps[]>([])
 
   const handleReadLeads = () => {
     axios
-      .get(`${ENDPOINT_URL}/readLeads`)
-      .then(({ data }) => {
-        setLeadsListData(data)
+      .get("http://localhost:3333/leads")
+      .then((response) => {
+        setLeads(response.data)
       })
       .catch((error) => {
         console.error(error)
       })
   }
 
-  const handleDeleteLead = (leadId: string) => {
-    if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
-      databaseMemory.delete(leadId)
-      notify("info")
-      setLeadsListData(databaseMemory.list())
-    } else {
-      axios
-        .delete(`${ENDPOINT_URL}/deleteLead/${leadId}`)
-        .then(() => {
-          notify("info")
-          handleReadLeads()
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
+  const handleDeleteLead = (leadId: number) => {
+    axios
+      .delete(`http://localhost:3333/leads/${leadId}`)
+      .then(() => {
+        handleReadLeads()
+        notify("delete")
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
-  const handleUpdateLead = (lead: LeadsListDataProps) => {
-    setLeadUpdateData(lead)
+  const handleUpdateLead = (lead: LeadsDataProps) => {
+    setLeadData(lead)
     navigate("/personalData")
   }
 
@@ -83,15 +73,9 @@ const ReadLeads = (): JSX.Element => {
   })
 
   useEffect(() => {
-    setLeadUpdateData(null)
-
-    if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
-      setLeadsListData(databaseMemory.list())
-    } else {
-      handleReadLeads()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    setLeadData(null)
+    handleReadLeads()
+  }, [setLeadData])
 
   return (
     <Main>
@@ -146,7 +130,7 @@ const ReadLeads = (): JSX.Element => {
       </FilterContainer>
 
       <TableContainer>
-        {leadsListData.length === 0 ? (
+        {leads.length === 0 ? (
           <p>Nenhum lead cadastrado</p>
         ) : (
           <div>
@@ -157,40 +141,40 @@ const ReadLeads = (): JSX.Element => {
               <li>Telefone</li>
               <li></li>
             </ul>
-            {leadsListData
-              .filter((elem: LeadsListDataProps) =>
+            {leads
+              .filter((elem: LeadsDataProps) =>
                 withFilter
                   ? formik.values.cpf
                     ? formik.values.name
-                      ? elem.leadId === formik.values.cpf &&
-                        elem.leadData.name
+                      ? elem.cpf === formik.values.cpf &&
+                        elem.name
                           .toLowerCase()
                           .includes(formik.values.name.toLowerCase())
-                      : elem.leadId === formik.values.cpf
+                      : elem.cpf === formik.values.cpf
                     : formik.values.name
-                    ? elem.leadData.name
+                    ? elem.name
                         .toLowerCase()
                         .includes(formik.values.name.toLowerCase())
                     : elem
                   : elem
               )
-              .map((elem: LeadsListDataProps, index: number) => (
+              .map((elem: LeadsDataProps, index: number) => (
                 <ul key={index}>
                   <li>
                     <span>Nome:</span>
-                    {elem.leadData.name}
+                    {elem.name}
                   </li>
                   <li>
                     <span>CPF:</span>
-                    {elem.leadData.cpf}
+                    {elem.cpf}
                   </li>
                   <li>
                     <span>E-mail:</span>
-                    {elem.leadData.email}
+                    {elem.email}
                   </li>
                   <li>
                     <span>Telefone:</span>
-                    {elem.leadData.phone}
+                    {elem.phone}
                   </li>
                   <li>
                     <MdOutlineModeEdit
@@ -201,7 +185,7 @@ const ReadLeads = (): JSX.Element => {
                     <LuTrash
                       className="icoRemove"
                       size={20}
-                      onClick={() => handleDeleteLead(elem.leadId)}
+                      onClick={() => handleDeleteLead(elem.id)}
                     />
                   </li>
                 </ul>

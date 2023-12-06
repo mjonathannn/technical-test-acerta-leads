@@ -1,40 +1,26 @@
 import { Id, toast } from "react-toastify"
 import { createContext, ReactNode, useContext, useState } from "react"
 
-import { DatabaseMemory } from "../database-memory.js"
-
 type AppContextProps = {
-  databaseMemory: any
-  leadUpdateData: LeadDataProps
-  setLeadUpdateData: React.Dispatch<LeadDataProps>
-  personalData: PersonalDataProps
-  setPersonalData: React.Dispatch<PersonalDataProps>
-  notify: (type: "success" | "info" | "update") => Id
+  leadData: LeadDataProps
+  setLeadData: React.Dispatch<React.SetStateAction<LeadDataProps>>
+  newLeadData: LeadDataProps
+  setNewLeadData: React.Dispatch<React.SetStateAction<LeadDataProps>>
+  notify: (type: "create" | "delete" | "update") => Id
 }
 
 type AppContextProviderProps = {
   children: ReactNode
 }
 
-type PersonalDataProps = {
+type LeadDataProps = {
   cpf?: string
   name?: string
   maritalStatus?: string
   spouseName?: string
   email?: string
   phone?: string
-}
-
-type LeadDataProps = {
-  leadData: {
-    cpf: string
-    name: string
-    maritalStatus: string
-    spouseName: string
-    email: string
-    phone: string
-  }
-  leadId: string
+  id?: number
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined)
@@ -42,48 +28,38 @@ const AppContext = createContext<AppContextProps | undefined>(undefined)
 export const AppContextProvider = ({
   children,
 }: AppContextProviderProps): JSX.Element => {
-  const databaseMemory = new DatabaseMemory()
+  const [leadData, setLeadData] = useState<LeadDataProps>(null)
+  const [newLeadData, setNewLeadData] = useState<LeadDataProps>(null)
 
-  const [leadUpdateData, setLeadUpdateData] = useState<LeadDataProps>(null)
-  const [personalData, setPersonalData] = useState<PersonalDataProps>(null)
-
-  const notify = (type: "success" | "info" | "update") => {
-    return type === "success" || type === "update"
-      ? toast.success(
-          `Lead ${
-            type === "update" ? "atualizado" : "cadastrado"
-          } com sucesso!`,
-          {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          }
-        )
-      : toast.info("Lead removido com sucesso!", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
+  const notify = (type: "create" | "delete" | "update") => {
+    return toast.success(
+      `Lead ${
+        type === "update"
+          ? "atualizado"
+          : type === "delete"
+          ? "removido"
+          : "cadastrado"
+      } com sucesso!`,
+      {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    )
   }
 
   return (
     <AppContext.Provider
       value={{
-        databaseMemory,
-        leadUpdateData,
-        setLeadUpdateData,
-        personalData,
-        setPersonalData,
+        leadData,
+        setLeadData,
+        newLeadData,
+        setNewLeadData,
         notify,
       }}
     >

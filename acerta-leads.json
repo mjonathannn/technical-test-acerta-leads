@@ -1,0 +1,40 @@
+{
+  "leads": [
+    {
+      "cpf": "823.684.590-73",
+      "name": "João da Silva Siqueira",
+      "maritalStatus": "solteiro(a)",
+      "spouseName": "",
+      "email": "joaosiqueira@gmail.com",
+      "phone": "(88) 88888-8888",
+      "id": 1
+    },
+    {
+      "cpf": "235.713.720-77",
+      "name": "Márcio dos Santos",
+      "maritalStatus": "casado(a)",
+      "spouseName": "Silvana Spohr",
+      "email": "marciosantos@gmail.com",
+      "phone": "(99) 99999-9999",
+      "id": 2
+    },
+    {
+      "cpf": "754.484.940-64",
+      "name": "Roberto Carlos",
+      "maritalStatus": "viúvo(a)",
+      "spouseName": "",
+      "email": "robertocarlos@gmail.com",
+      "phone": "(23) 45452-5234",
+      "id": 3
+    },
+    {
+      "cpf": "541.713.220-90",
+      "name": "Thiago Alves Morais",
+      "maritalStatus": "casado(a)",
+      "spouseName": "Beatriz Lima",
+      "email": "thiagothi@hotmail.com",
+      "phone": "(34) 34343-4343",
+      "id": 4
+    }
+  ]
+}

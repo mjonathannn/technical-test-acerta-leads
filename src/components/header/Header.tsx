@@ -16,12 +16,7 @@ const Header = ({ label, showButton }: HeaderProps): JSX.Element => {
 
   return (
     <HeaderContainer>
-      <img
-        src={AcertaLogo}
-        alt="Acerta Logo"
-        title="Acerta Logo"
-        onClick={() => navigate("/")}
-      />
+      <img src={AcertaLogo} alt="Acerta Logo" title="Acerta Logo" />
 
       <NavContainer>
         <h1>{label}</h1>

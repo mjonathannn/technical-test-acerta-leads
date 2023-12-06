@@ -11,9 +11,7 @@ import {
   InputContainer,
 } from "../PersonalData/PersonalDataStyles"
 
-import { isRemoteHost } from "../../utils"
 import { useAppContext } from "../../context/appContext"
-import { DATA_SOURCE, ENDPOINT_URL } from "../../constants"
 import { InputMasked, InputText } from "../../components/inputs"
 import {
   Button,
@@ -26,63 +24,58 @@ import {
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { databaseMemory, leadUpdateData, personalData, notify } =
-    useAppContext()
+  const { leadData, newLeadData, notify } = useAppContext()
 
   const handleSubmit = (values: any) => {
-    if (leadUpdateData) {
-      if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
-        databaseMemory.update(leadUpdateData.leadId, {
-          ...personalData,
-          ...values,
-        })
-
-        notify("update")
-        navigate("/")
-      } else {
-        axios
-          .post(`${ENDPOINT_URL}/updateLead/${leadUpdateData.leadId}`, {
-            ...personalData,
+    if (leadData) {
+      axios
+        .put(
+          `http://localhost:3333/leads/${leadData.id}`,
+          {
+            ...newLeadData,
             ...values,
-          })
-          .then(() => {
-            notify("update")
-            navigate("/")
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-      }
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(() => {
+          notify("update")
+          navigate("/")
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     } else {
-      if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
-        databaseMemory.create({
-          ...personalData,
-          ...values,
-        })
-
-        notify("success")
-        navigate("/")
-      } else {
-        axios
-          .post(`${ENDPOINT_URL}/createLead`, {
-            ...personalData,
+      axios
+        .post(
+          "http://localhost:3333/leads",
+          {
+            ...newLeadData,
             ...values,
-          })
-          .then(() => {
-            notify("success")
-            navigate("/")
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-      }
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(() => {
+          notify("create")
+          navigate("/")
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 
   const formik = useFormik({
     initialValues: {
-      email: leadUpdateData ? leadUpdateData.leadData.email : "",
-      phone: leadUpdateData ? leadUpdateData.leadData.phone : "",
+      email: leadData ? leadData.email : "",
+      phone: leadData ? leadData.phone : "",
     },
     validationSchema: Yup.object().shape({
       email: Yup.string()
@@ -98,7 +91,7 @@ const Contact = (): JSX.Element => {
 
   return (
     <Main>
-      <Header label={leadUpdateData ? "Atualizar Lead" : "Cadastro de Leads"} />
+      <Header label={leadData ? "Atualizar Lead" : "Cadastro de Leads"} />
 
       <Container>
         <StepCounter />
@@ -149,11 +142,9 @@ const Contact = (): JSX.Element => {
             <Button
               type="submit"
               appearance="primary"
-              label={leadUpdateData ? "Atualizar" : "Cadastrar"}
+              label={leadData ? "Atualizar" : "Cadastrar"}
               disabled={
-                leadUpdateData
-                  ? !formik.isValid
-                  : !(formik.isValid && formik.dirty)
+                leadData ? !formik.isValid : !(formik.isValid && formik.dirty)
               }
               onClick={() => null}
             />
