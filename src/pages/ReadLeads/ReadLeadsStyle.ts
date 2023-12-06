@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Main = styled.main`
   height: 100%;
 `
-export const Container = styled.div`
+export const FilterContainer = styled.div`
   width: 1082px;
   padding: 24px;
   background-color: var(--background-white);

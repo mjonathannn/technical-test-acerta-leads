@@ -1,14 +1,15 @@
 import axios from "axios"
 import { LuTrash } from "react-icons/lu"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { MdOutlineModeEdit } from "react-icons/md"
 
-import { Container, TableContainer, Main } from "./ReadLeadsStyle"
+import { Main, FilterContainer, TableContainer } from "./ReadLeadsStyle"
 
 import { Header } from "../../components"
-import { isLocalhost } from "../../utils"
-import { ENDPOINT_URL } from "../../constants/app"
+import { isRemoteHost } from "../../utils"
 import { useAppContext } from "../../context/appContext"
+import { DATA_SOURCE, ENDPOINT_URL } from "../../constants/app"
 
 type LeadsListDataProps = {
   leadData: {
@@ -23,11 +24,13 @@ type LeadsListDataProps = {
 }
 
 const ReadLeads = (): JSX.Element => {
+  const navigate = useNavigate()
+
   const [leadsListData, setLeadsListData] = useState<LeadsListDataProps[]>([])
 
-  const { databaseMemory, notify } = useAppContext()
+  const { databaseMemory, setLeadUpdateData, notify } = useAppContext()
 
-  const readLeads = () => {
+  const handleReadLeads = () => {
     axios
       .get(`${ENDPOINT_URL}/readLeads`)
       .then(({ data }) => {
@@ -38,19 +41,45 @@ const ReadLeads = (): JSX.Element => {
       })
   }
 
-  useEffect(() => {
-    if (!isLocalhost()) {
+  const handleDeleteLead = (leadId: string) => {
+    if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
+      databaseMemory.delete(leadId)
+      notify("info")
       setLeadsListData(databaseMemory.list())
     } else {
-      readLeads()
+      axios
+        .delete(`${ENDPOINT_URL}/deleteLead/${leadId}`)
+        .then(() => {
+          notify("info")
+          handleReadLeads()
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
-  }, [databaseMemory])
+  }
+
+  const handleUpdateLead = (lead: LeadsListDataProps) => {
+    setLeadUpdateData(lead)
+    navigate("/personalData")
+  }
+
+  useEffect(() => {
+    setLeadUpdateData(null)
+
+    if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
+      setLeadsListData(databaseMemory.list())
+    } else {
+      handleReadLeads()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Main>
       <Header label="Consulta de Leads" showButton />
 
-      <Container></Container>
+      <FilterContainer>Filtro</FilterContainer>
 
       <TableContainer>
         {leadsListData.length === 0 ? (
@@ -83,21 +112,15 @@ const ReadLeads = (): JSX.Element => {
                   {elem.leadData.phone}
                 </li>
                 <li>
-                  <MdOutlineModeEdit className="icoEdit" size={20} />
+                  <MdOutlineModeEdit
+                    className="icoEdit"
+                    size={20}
+                    onClick={() => handleUpdateLead(elem)}
+                  />
                   <LuTrash
                     className="icoRemove"
                     size={20}
-                    onClick={() => {
-                      axios
-                        .delete(`${ENDPOINT_URL}/deleteLead/${elem.leadId}`)
-                        .then(() => {
-                          notify("info")
-                          readLeads()
-                        })
-                        .catch((error) => {
-                          console.error(error)
-                        })
-                    }}
+                    onClick={() => handleDeleteLead(elem.leadId)}
                   />
                 </li>
               </ul>

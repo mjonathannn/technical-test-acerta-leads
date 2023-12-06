@@ -24,14 +24,16 @@ import {
 const PersonalData = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { setPersonalData } = useAppContext()
+  const { leadUpdateData, setPersonalData } = useAppContext()
 
   const formik = useFormik({
     initialValues: {
-      cpf: "",
-      name: "",
-      maritalStatus: "",
-      spouseName: "",
+      cpf: leadUpdateData ? leadUpdateData.leadData.cpf : "",
+      name: leadUpdateData ? leadUpdateData.leadData.name : "",
+      maritalStatus: leadUpdateData
+        ? leadUpdateData.leadData.maritalStatus
+        : "",
+      spouseName: leadUpdateData ? leadUpdateData.leadData.spouseName : "",
     },
     validationSchema: Yup.object().shape({
       cpf: Yup.string()
@@ -57,7 +59,7 @@ const PersonalData = (): JSX.Element => {
 
   return (
     <Main>
-      <Header label="Cadastro de Leads" />
+      <Header label={leadUpdateData ? "Atualizar Lead" : "Cadastro de Leads"} />
 
       <Container>
         <StepCounter firstStep />
@@ -102,6 +104,9 @@ const PersonalData = (): JSX.Element => {
               <InputSelect
                 name="maritalStatus"
                 title="Estado civil"
+                value={
+                  leadUpdateData ? leadUpdateData.leadData.maritalStatus : ""
+                }
                 onChange={formik.setFieldValue}
               />
               {formik.touched.maritalStatus && formik.errors.maritalStatus && (
@@ -139,7 +144,11 @@ const PersonalData = (): JSX.Element => {
               type="submit"
               appearance="primary"
               label="Avançar"
-              disabled={!(formik.isValid && formik.dirty)}
+              disabled={
+                leadUpdateData
+                  ? !formik.isValid
+                  : !(formik.isValid && formik.dirty)
+              }
               onClick={() => null}
             />
           </ButtonsContainer>

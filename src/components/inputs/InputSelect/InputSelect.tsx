@@ -5,16 +5,34 @@ import { InputSelectContainer, Title } from "./InputSelectStyles"
 type InputSelectProps = {
   name: string
   title: string
+  value?: string
   onChange: any
 }
 
 const InputSelect = ({
   name,
   title,
+  value,
   onChange,
 }: InputSelectProps): JSX.Element => {
+  const options = [
+    { value: "solteiro(a)", label: "Solteiro(a)" },
+    { value: "casado(a)", label: "Casado(a)" },
+    { value: "viúvo(a)", label: "Viúvo(a)" },
+    { value: "separado(a)", label: "Separado(a)" },
+  ]
+
+  const defaultValue = value
+    ? options.filter((elem: any) => elem.value === value)
+    : ""
+
   const handleChange = (value: string) => {
-    onChange(name, value)
+    if (value !== "casado(a)") {
+      onChange(name, value)
+      onChange("spouseName", "")
+    } else {
+      onChange(name, value)
+    }
   }
 
   return (
@@ -22,12 +40,8 @@ const InputSelect = ({
       <Title>{title}</Title>
 
       <Select
-        options={[
-          { value: "solteiro(a)", label: "Solteiro(a)" },
-          { value: "casado(a)", label: "Casado(a)" },
-          { value: "viúvo(a)", label: "Viúvo(a)" },
-          { value: "separado(a)", label: "Separado(a)" },
-        ]}
+        defaultValue={defaultValue[0]}
+        options={options}
         styles={{
           control: (base, props) => ({
             ...base,

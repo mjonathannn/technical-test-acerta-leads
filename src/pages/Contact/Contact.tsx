@@ -11,7 +11,9 @@ import {
   InputContainer,
 } from "../PersonalData/PersonalDataStyles"
 
+import { isRemoteHost } from "../../utils"
 import { useAppContext } from "../../context/appContext"
+import { DATA_SOURCE, ENDPOINT_URL } from "../../constants"
 import { InputMasked, InputText } from "../../components/inputs"
 import {
   Button,
@@ -24,12 +26,63 @@ import {
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { personalData, notify } = useAppContext()
+  const { databaseMemory, leadUpdateData, personalData, notify } =
+    useAppContext()
+
+  const handleSubmit = (values: any) => {
+    if (leadUpdateData) {
+      if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
+        databaseMemory.update(leadUpdateData.leadId, {
+          ...personalData,
+          ...values,
+        })
+
+        notify("update")
+        navigate("/")
+      } else {
+        axios
+          .post(`${ENDPOINT_URL}/updateLead/${leadUpdateData.leadId}`, {
+            ...personalData,
+            ...values,
+          })
+          .then(() => {
+            notify("update")
+            navigate("/")
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+    } else {
+      if (isRemoteHost() || DATA_SOURCE === "DATABASE_MEMORY") {
+        databaseMemory.create({
+          ...personalData,
+          ...values,
+        })
+
+        notify("success")
+        navigate("/")
+      } else {
+        axios
+          .post(`${ENDPOINT_URL}/createLead`, {
+            ...personalData,
+            ...values,
+          })
+          .then(() => {
+            notify("success")
+            navigate("/")
+          })
+          .catch((error) => {
+            console.error(error)
+          })
+      }
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      phone: "",
+      email: leadUpdateData ? leadUpdateData.leadData.email : "",
+      phone: leadUpdateData ? leadUpdateData.leadData.phone : "",
     },
     validationSchema: Yup.object().shape({
       email: Yup.string()
@@ -39,26 +92,13 @@ const Contact = (): JSX.Element => {
         .required("Campo obrigatório")
         .min(15, "Telefone inválido"),
     }),
-    onSubmit: (values) => {
-      axios
-        .post("http://127.0.0.1:3333/createLead", {
-          ...personalData,
-          ...values,
-        })
-        .then(() => {
-          notify("success")
-          navigate("/")
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    },
+    onSubmit: (values) => handleSubmit(values),
     validateOnBlur: true,
   })
 
   return (
     <Main>
-      <Header label="Cadastro de Leads" />
+      <Header label={leadUpdateData ? "Atualizar Lead" : "Cadastro de Leads"} />
 
       <Container>
         <StepCounter />
@@ -110,7 +150,11 @@ const Contact = (): JSX.Element => {
               type="submit"
               appearance="primary"
               label="Cadastrar"
-              disabled={!(formik.isValid && formik.dirty)}
+              disabled={
+                leadUpdateData
+                  ? !formik.isValid
+                  : !(formik.isValid && formik.dirty)
+              }
               onClick={() => null}
             />
           </ButtonsContainer>

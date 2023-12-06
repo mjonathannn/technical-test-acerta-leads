@@ -1,7 +1,7 @@
 export class DatabaseMemory {
   #leads = new Map([
     [
-      Math.random().toString(36).substring(0, 7),
+      "823.684.590-73",
       {
         cpf: "823.684.590-73",
         name: "João da Silva",
@@ -12,7 +12,7 @@ export class DatabaseMemory {
       },
     ],
     [
-      Math.random().toString(36).substring(0, 7),
+      "235.713.720-77",
       {
         cpf: "235.713.720-77",
         name: "Márcio dos Santos",
@@ -37,7 +37,7 @@ export class DatabaseMemory {
   }
 
   create(lead) {
-    const leadId = Math.random().toString(36).substring(0, 7)
+    const leadId = lead.cpf
 
     this.#leads.set(leadId, lead)
   }

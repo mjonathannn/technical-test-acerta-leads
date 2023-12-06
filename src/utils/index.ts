@@ -1,1 +1,1 @@
-export { default as isLocalhost } from "./isLocalhost"
+export { default as isRemoteHost } from "./isRemoteHost"
