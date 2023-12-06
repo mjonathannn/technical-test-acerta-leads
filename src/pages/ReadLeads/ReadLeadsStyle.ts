@@ -1,9 +1,5 @@
 import styled from "styled-components"
 
-type Props = {
-  indexIsEven: boolean
-}
-
 export const Main = styled.main`
   height: 100%;
 `
@@ -23,45 +19,97 @@ export const TableContainer = styled.div`
   background-color: var(--background-white);
   border-radius: 12px;
 
-  @media (max-width: 1200px) {
-    width: 90vw;
-  }
-`
-export const TableHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 8px 24px;
-  border-radius: 4px 4px 0px 0px;
-  background: var(--background-grey);
-
   div {
-    width: 208px;
+    width: 100%;
+  }
+
+  div ul:nth-child(odd) {
+    background: var(--background-grey);
+  }
+
+  div ul:nth-child(even) {
+    background: var(--background-white);
+  }
+
+  div ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  div ul:first-child li {
+    display: flex;
+    width: 250px;
+    padding: 8px 24px;
+    color: var(--grey-dark);
+    background: var(--background-grey);
+    border-radius: 4px 4px 0px 0px;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 120%;
-    color: var(--grey-dark);
   }
-`
-export const TableRow = styled.div<Props>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 12px 24px;
-  border-right: 1px solid var(--background-grey);
-  border-left: 1px solid var(--background-grey);
-  background-color: ${({ indexIsEven }) =>
-    indexIsEven ? "var(--background-white)" : "var(--background-system)"};
 
-  div {
-    width: 208px;
+  div ul li {
+    display: flex;
+    width: 250px;
+    padding: 12px 24px;
     color: var(--grey-base);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 140%;
+    list-style: none;
+    line-break: anywhere;
+  }
+
+  div ul li span {
+    display: none;
+    margin: 0 10px 0 0;
+    font-weight: 700;
+    width: 60px;
+  }
+
+  div ul li:nth-child(5) {
+    justify-content: end;
+  }
+
+  .icoEdit,
+  .icoRemove {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-base);
+    }
+  }
+
+  .icoRemove {
+    margin: 0 0 0 20px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 90vw;
+  }
+
+  @media screen and (max-width: 850px) {
+    padding: 12px;
+
+    div ul {
+      display: block;
+      margin: 0 0 20px 0;
+      border: 1px solid var(--grey-light);
+      border-radius: 12px;
+    }
+
+    div ul:first-child {
+      display: none;
+    }
+
+    div ul li {
+      width: 100%;
+      padding: 6px 12px;
+    }
+
+    div ul li span {
+      display: block;
+    }
   }
 `

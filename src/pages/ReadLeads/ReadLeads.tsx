@@ -1,15 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-import {
-  Container,
-  TableRow,
-  TableContainer,
-  Main,
-  TableHeader,
-} from "./ReadLeadsStyle"
+import { Container, TableContainer, Main } from "./ReadLeadsStyle"
 
 import { Header } from "../../components"
+import { ENDPOINT_URL } from "../../constants/app"
+
+import { LuTrash } from "react-icons/lu"
+import { MdOutlineModeEdit } from "react-icons/md"
 
 type LeadsListDataProps = {
   leadData: {
@@ -28,9 +26,9 @@ const ReadLeads = (): JSX.Element => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3333/readLeads")
-      .then((response) => {
-        setLeadsListData(response.data)
+      .get(`${ENDPOINT_URL}/readLeads`)
+      .then(({ data }) => {
+        setLeadsListData(data)
       })
       .catch((error) => {
         console.error(error)
@@ -44,20 +42,39 @@ const ReadLeads = (): JSX.Element => {
       <Container></Container>
 
       <TableContainer>
-        <TableHeader>
-          <div>Nome</div>
-          <div>CPF</div>
-          <div>E-mail</div>
-          <div>Telefone</div>
-        </TableHeader>
-        {leadsListData.map((elem: LeadsListDataProps, index: number) => (
-          <TableRow key={index} indexIsEven={index % 2 === 0}>
-            <div>{elem.leadData.name}</div>
-            <div>{elem.leadData.cpf}</div>
-            <div>{elem.leadData.email}</div>
-            <div>{elem.leadData.phone}</div>
-          </TableRow>
-        ))}
+        <div>
+          <ul>
+            <li>Nome</li>
+            <li>CPF</li>
+            <li>E-mail</li>
+            <li>Telefone</li>
+            <li></li>
+          </ul>
+          {leadsListData.map((elem: LeadsListDataProps, index: number) => (
+            <ul key={index}>
+              <li>
+                <span>Nome:</span>
+                {elem.leadData.name}
+              </li>
+              <li>
+                <span>CPF:</span>
+                {elem.leadData.cpf}
+              </li>
+              <li>
+                <span>E-mail:</span>
+                {elem.leadData.email}
+              </li>
+              <li>
+                <span>Telefone:</span>
+                {elem.leadData.phone}
+              </li>
+              <li>
+                <MdOutlineModeEdit className="icoEdit" size={20} />
+                <LuTrash className="icoRemove" size={20} />
+              </li>
+            </ul>
+          ))}
+        </div>
       </TableContainer>
     </Main>
   )
