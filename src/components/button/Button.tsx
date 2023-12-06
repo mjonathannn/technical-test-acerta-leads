@@ -1,8 +1,8 @@
 import { IoAddSharp } from "react-icons/io5"
 
-import { Button } from "./LabelButtonStyles"
+import { ButtonStyled } from "./ButtonStyles"
 
-type LabelButtonProps = {
+type ButtonProps = {
   type: "button" | "submit"
   appearance: "primary" | "secondary"
   label: string
@@ -11,20 +11,20 @@ type LabelButtonProps = {
   onClick: () => void
 }
 
-const LabelButton = ({
+const Button = ({
   type,
   appearance,
   label,
   showIcon,
   disabled,
   onClick,
-}: LabelButtonProps): JSX.Element => {
+}: ButtonProps): JSX.Element => {
   const handleClick = () => {
     onClick()
   }
 
   return (
-    <Button
+    <ButtonStyled
       type={type}
       appearance={appearance}
       disabled={disabled}
@@ -33,8 +33,8 @@ const LabelButton = ({
       <span>{label}</span>
 
       {showIcon && <IoAddSharp />}
-    </Button>
+    </ButtonStyled>
   )
 }
 
-export default LabelButton
+export default Button

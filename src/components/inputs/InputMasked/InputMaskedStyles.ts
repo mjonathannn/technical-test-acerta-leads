@@ -42,14 +42,8 @@ export const InputMaskedContainer = styled.div`
     width: 38vw;
   }
 
-  @media (max-width: 550px) {
-    input {
-      padding: 8px 10px 8px 10px;
-    }
-  }
-
-  @media (max-width: 450px) {
-    width: 36vw;
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `
 export const Title = styled.label`

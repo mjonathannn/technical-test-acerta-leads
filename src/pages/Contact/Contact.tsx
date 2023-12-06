@@ -6,24 +6,25 @@ import { useNavigate } from "react-router-dom"
 import {
   Main,
   Container,
-  InputsContainer,
   ButtonsContainer,
-} from "./ContactStyles"
+  InputsRow,
+  InputContainer,
+} from "../PersonalData/PersonalDataStyles"
 
 import { useAppContext } from "../../context/appContext"
 import { InputMasked, InputText } from "../../components/inputs"
 import {
+  Button,
   ErrorMessage,
   FormTitle,
   Header,
-  LabelButton,
   StepCounter,
 } from "../../components"
 
 const Contact = (): JSX.Element => {
   const navigate = useNavigate()
 
-  const { personalData } = useAppContext()
+  const { personalData, notify } = useAppContext()
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +45,10 @@ const Contact = (): JSX.Element => {
           ...personalData,
           ...values,
         })
-        .then(() => navigate("/"))
+        .then(() => {
+          notify("success")
+          navigate("/")
+        })
         .catch((error) => {
           console.error(error)
         })
@@ -62,8 +66,8 @@ const Contact = (): JSX.Element => {
         <FormTitle />
 
         <form onSubmit={formik.handleSubmit}>
-          <InputsContainer>
-            <div>
+          <InputsRow>
+            <InputContainer>
               <InputText
                 id="email"
                 type="text"
@@ -77,9 +81,9 @@ const Contact = (): JSX.Element => {
               {formik.touched.email && formik.errors.email && (
                 <ErrorMessage message={formik.errors.email} />
               )}
-            </div>
+            </InputContainer>
 
-            <div>
+            <InputContainer>
               <InputMasked
                 id="phone"
                 name="phone"
@@ -91,18 +95,18 @@ const Contact = (): JSX.Element => {
               {formik.touched.phone && formik.errors.phone && (
                 <ErrorMessage message={formik.errors.phone} />
               )}
-            </div>
-          </InputsContainer>
+            </InputContainer>
+          </InputsRow>
 
           <ButtonsContainer>
-            <LabelButton
+            <Button
               type="button"
               appearance="secondary"
               label="Cancelar"
               onClick={() => navigate("/")}
             />
 
-            <LabelButton
+            <Button
               type="submit"
               appearance="primary"
               label="Cadastrar"

@@ -13,10 +13,16 @@ export const Container = styled.div`
     width: 90vw;
   }
 `
-export const InputsContainer = styled.div`
+export const InputsRow = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 85px;
+
+  @media (max-width: 500px) {
+    display: block;
+  }
+`
+export const InputContainer = styled.div`
+  height: 90px;
 `
 export const ButtonsContainer = styled.div`
   display: flex;

@@ -1,8 +1,10 @@
+import { Id, toast } from "react-toastify"
 import { createContext, ReactNode, useContext, useState } from "react"
 
 type AppContextProps = {
   personalData: PersonalDataProps
   setPersonalData: React.Dispatch<PersonalDataProps>
+  notify: (type: "success" | "info") => Id
 }
 
 type AppContextProviderProps = {
@@ -25,11 +27,36 @@ export const AppContextProvider = ({
 }: AppContextProviderProps): JSX.Element => {
   const [personalData, setPersonalData] = useState<PersonalDataProps>(null)
 
+  const notify = (type: "success" | "info") => {
+    return type === "success"
+      ? toast.success("Lead cadastrado com sucesso!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : toast.info("Lead removido com sucesso!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+  }
+
   return (
     <AppContext.Provider
       value={{
         personalData,
         setPersonalData,
+        notify,
       }}
     >
       {children}

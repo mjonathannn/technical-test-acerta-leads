@@ -17,8 +17,8 @@ export const InputSelectContainer = styled.div`
     width: 38vw;
   }
 
-  @media (max-width: 450px) {
-    width: 36vw;
+  @media (max-width: 500px) {
+    width: 100%;
   }
 `
 export const Title = styled.label`

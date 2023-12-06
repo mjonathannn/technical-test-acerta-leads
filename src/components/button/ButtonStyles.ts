@@ -4,7 +4,7 @@ type Props = {
   appearance: "primary" | "secondary"
 }
 
-export const Button = styled.button<Props>`
+export const ButtonStyled = styled.button<Props>`
   display: flex;
   align-items: center;
   justify-content: center;

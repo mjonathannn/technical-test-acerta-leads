@@ -6,17 +6,18 @@ import { useNavigate } from "react-router-dom"
 import {
   Main,
   Container,
-  InputsContainer,
   ButtonsContainer,
+  InputsRow,
+  InputContainer,
 } from "./PersonalDataStyles"
 
 import { useAppContext } from "../../context/appContext"
 import { InputMasked, InputSelect, InputText } from "../../components/inputs"
 import {
+  Button,
   ErrorMessage,
   FormTitle,
   Header,
-  LabelButton,
   StepCounter,
 } from "../../components"
 
@@ -64,8 +65,8 @@ const PersonalData = (): JSX.Element => {
         <FormTitle personalData />
 
         <form onSubmit={formik.handleSubmit}>
-          <InputsContainer>
-            <div>
+          <InputsRow>
+            <InputContainer>
               <InputMasked
                 id="cpf"
                 name="cpf"
@@ -77,9 +78,9 @@ const PersonalData = (): JSX.Element => {
               {formik.touched.cpf && formik.errors.cpf && (
                 <ErrorMessage message={formik.errors.cpf} />
               )}
-            </div>
+            </InputContainer>
 
-            <div>
+            <InputContainer>
               <InputText
                 id="name"
                 type="text"
@@ -93,11 +94,11 @@ const PersonalData = (): JSX.Element => {
               {formik.touched.name && formik.errors.name && (
                 <ErrorMessage message={formik.errors.name} />
               )}
-            </div>
-          </InputsContainer>
+            </InputContainer>
+          </InputsRow>
 
-          <InputsContainer>
-            <div>
+          <InputsRow>
+            <InputContainer>
               <InputSelect
                 name="maritalStatus"
                 title="Estado civil"
@@ -106,9 +107,9 @@ const PersonalData = (): JSX.Element => {
               {formik.touched.maritalStatus && formik.errors.maritalStatus && (
                 <ErrorMessage message={formik.errors.maritalStatus} />
               )}
-            </div>
+            </InputContainer>
 
-            <div>
+            <InputContainer>
               <InputText
                 id="spouseName"
                 type="text"
@@ -123,18 +124,18 @@ const PersonalData = (): JSX.Element => {
               {formik.touched.spouseName && formik.errors.spouseName && (
                 <ErrorMessage message={formik.errors.spouseName} />
               )}
-            </div>
-          </InputsContainer>
+            </InputContainer>
+          </InputsRow>
 
           <ButtonsContainer>
-            <LabelButton
+            <Button
               type="button"
               appearance="secondary"
               label="Cancelar"
               onClick={() => navigate("/")}
             />
 
-            <LabelButton
+            <Button
               type="submit"
               appearance="primary"
               label="Avançar"

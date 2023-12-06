@@ -16,16 +16,4 @@ export const ErrorMessageContainer = styled.div`
     font-weight: 400;
     line-height: 120%;
   }
-
-  @media (max-width: 470px) {
-    :first-child {
-      width: 12px;
-      color: var(--semantic-negative-dark);
-      margin: 0 4px 0 0;
-    }
-
-    span {
-      font-size: 12px;
-    }
-  }
 `

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 import { HeaderContainer, NavContainer } from "./HeaderStyles"
 
-import { LabelButton } from ".."
+import { Button } from ".."
 
 import AcertaLogo from "../../images/acerta_logo.svg"
 
@@ -27,7 +27,7 @@ const Header = ({ label, showButton }: HeaderProps): JSX.Element => {
         <h1>{label}</h1>
 
         {showButton && (
-          <LabelButton
+          <Button
             type="button"
             appearance="secondary"
             label="Novo lead"

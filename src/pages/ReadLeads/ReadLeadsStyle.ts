@@ -19,6 +19,14 @@ export const TableContainer = styled.div`
   background-color: var(--background-white);
   border-radius: 12px;
 
+  p {
+    margin: 0;
+    color: var(--grey-light);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
   div {
     width: 100%;
   }
@@ -37,13 +45,17 @@ export const TableContainer = styled.div`
     margin: 0;
   }
 
+  div ul:first-child {
+    border-radius: 10px 10px 0px 0px;
+  }
+
   div ul:first-child li {
     display: flex;
     width: 250px;
     padding: 8px 24px;
     color: var(--grey-dark);
     background: var(--background-grey);
-    border-radius: 4px 4px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -65,7 +77,7 @@ export const TableContainer = styled.div`
     display: none;
     margin: 0 10px 0 0;
     font-weight: 700;
-    width: 60px;
+    min-width: 54px;
   }
 
   div ul li:nth-child(5) {
@@ -90,13 +102,13 @@ export const TableContainer = styled.div`
   }
 
   @media screen and (max-width: 850px) {
-    padding: 12px;
+    padding: 24px 12px;
 
     div ul {
       display: block;
       margin: 0 0 20px 0;
       border: 1px solid var(--grey-light);
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     div ul:first-child {

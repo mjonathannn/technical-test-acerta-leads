@@ -10,7 +10,7 @@ import {
   InputsContainer,
 } from "./FilterStyles"
 
-import { LabelButton } from "../../components"
+import { Button } from "../../components"
 import { InputMasked, InputText } from "../inputs"
 
 const Filter = (): JSX.Element => {
@@ -66,7 +66,7 @@ const Filter = (): JSX.Element => {
         </InputsContainer>
 
         <ButtonsContainer>
-          <LabelButton
+          <Button
             type="button"
             appearance="secondary"
             label="Limpar tudo"
@@ -76,7 +76,7 @@ const Filter = (): JSX.Element => {
             }}
           />
 
-          <LabelButton
+          <Button
             type="submit"
             appearance="primary"
             label="Filtrar"
